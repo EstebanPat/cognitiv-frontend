@@ -4,9 +4,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Autocomplete, Button, IconButton, InputAdornment, OutlinedInput, TextField } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import "./SignUp.scss"
+import "./SignUp.scss";
+import { Auth } from '../../../api/auth';
+
+import { ENV } from "../../../utils";
+const { BASE_API_URL, API_ROUTES } = ENV;
 
 const SignUp = () => {
+    const auth = new Auth()
     const [names, setNames] = useState('');
     const [lastnames, setLastnames] = useState('');
     const [birthDay, setBirthDay] = useState(new Date());
@@ -72,17 +77,31 @@ const SignUp = () => {
             documentType: documentType.value,
             phone: phone,
             genre: genre.value,
-            schooling: schooling.value,
-
+            schooling: schooling.value
         }
         console.log(data);
+
+        const opts = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data),
+        }
+        
+        console.log(opts.body);
+        fetch(`${BASE_API_URL}${API_ROUTES.AUTH}`, opts)
+        .then((response) =>{
+            if (!response.ok) {
+                throw new Error('No se pudo completar la solicitud');
+              }
+              return response.json();
+        })
+        
         /* try{
             const response = await auth.signup();
             console.log(response);
         }catch (error){
             console.log(error);
-        } */
-        
+        }  */      
         
     }
 
@@ -173,7 +192,7 @@ const SignUp = () => {
                         <OutlinedInput
                             sx={{ width: 300 }}
                             id="outlined-adornment-password"
-                            
+                            label="Password"
                             type={showPassword ? 'text' : 'password'}
                             endAdornment={
                             <InputAdornment position="end">
@@ -187,9 +206,10 @@ const SignUp = () => {
                                 </IconButton>
                             </InputAdornment>
                             }
-                            label="Password"
+                            
                             value={password}
                             onChange={handleSetPassword}
+                            InputLabelProps={{ shrink: true }}
                         />
                         </div>
                     </div>
