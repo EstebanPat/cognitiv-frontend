@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+const CarouselContainer = styled.div`
+  position: absolute;
+  display:flex;
+  flex-direction:center;
+  max-width: 700px; 
+  width: 100%;
+  height: 450px; 
+  overflow: hidden;
+`;
+
 const CarouselImg = styled.img`
-  max-width: 500px;
+  display:flex;
+  flex-direction:center;
   width: 100%;
   height: auto;
+  object-fit: contain;
   opacity: 0;
   transition: 1s;
   &.loaded {
@@ -60,25 +72,27 @@ function Carousel(props) {
 
   return (
     <>
-        <CarouselImg
-            src={`../../assets/images/carousel/${props.images[selectedIndex]}`}
+        <CarouselContainer>
+          <CarouselImg
+            src={props.images[selectedIndex]}
             alt="Gentleman"
             className={loaded ? "loaded" : ""}
             onLoad={() => {
-                console.log('La imagen se ha cargado correctamente');
-                setLoaded(true);
+              console.log('La imagen se ha cargado correctamente');
+              setLoaded(true);
             }}
-        />
-      <CarouselButtonContainer>
-        {props.showButtons ? (
-          <>
-            <CarouselButton onClick={previous}>{"<"}</CarouselButton>
-            <CarouselButton onClick={next}>{">"}</CarouselButton>
-          </>
-        ) : (
-          <></>
-        )}
-      </CarouselButtonContainer>
+          />
+          <CarouselButtonContainer>
+            {props.showButtons ? (
+              <>
+                <CarouselButton onClick={previous}>{"<"}</CarouselButton>
+                <CarouselButton onClick={next}>{">"}</CarouselButton>
+              </>
+            ) : (
+              <></>
+            )}
+          </CarouselButtonContainer>
+        </CarouselContainer>
     </>
   );
 }

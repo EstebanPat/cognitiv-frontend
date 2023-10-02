@@ -1,13 +1,11 @@
 nav {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
     background-color: #FEFEFA;
-
-    padding-left: 120px;
-    padding-right: 120px;
-    padding-top: 30px;
+    padding-left: 7.5rem;
+    padding-right: 7.5rem;
 
     & .title {
         font-size: 2rem;
@@ -27,6 +25,7 @@ nav {
             list-style: none; 
 
             & a {
+                font-size: 1.2rem;
                 display: block;
                 text-decoration: none;
                 color: #13511a;
