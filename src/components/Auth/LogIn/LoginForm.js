@@ -4,6 +4,24 @@ import passIcon from "../../../assets/icons/LoginIcons/password.png"
 import "./LoginForm.css"
 
 const LoginForm = () => {
+  const [userDocument, setUserDocument] = useState("");
+  const [userPass, setUserPass] = useState("");
+
+  const handleSetDocument = (event) => {
+    setUserDocument(event.target.value)
+  }
+
+  const handleSetPass = (event) => {
+    setUserPass(event.target.value)
+  }
+
+  const handleSave = async () => {
+    const data = {
+        document: userDocument,
+        password: userPass,
+    }
+    console.log(data);
+  }
 
   return (
     <div className='main-container-login'>
@@ -21,6 +39,7 @@ const LoginForm = () => {
             name="document" 
             className='text-input' 
             placeholder='Documento'
+            onChange={handleSetDocument}
           >
           </input>
         </div>
@@ -32,7 +51,9 @@ const LoginForm = () => {
             id="password" 
             name="password" 
             className='text-input' 
-            placeholder='Contraseña'>
+            placeholder='Contraseña'
+            onChange={handleSetPass}
+          >
           </input>
         </div>
       </form>
@@ -42,7 +63,7 @@ const LoginForm = () => {
       </div>
 
       <div className='button-container'>
-        <a className='button'>Iniciar sesión</a>
+        <a className='button' onClick={handleSave}>Iniciar sesión</a>
       </div>
     </div>
   )
