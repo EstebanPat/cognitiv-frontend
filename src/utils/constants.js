@@ -7,8 +7,8 @@ export const ENV = {
     BASE_API_URL: SERVER_IP + API + API_VERSION,
     //Encabezado rutas para almacenamiento, edicion, y eliminacion de archivos 
     BASE_URL: SERVER_IP,
-    API_ROUTES:{
-        AUTH: "users/signup",
+    API_ROUTER:{
+        REGISTER: "users/signup",
         USERS: "users/",
     }
 }

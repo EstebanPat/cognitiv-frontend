@@ -1,12 +1,18 @@
-import { ENV } from "../utils";
-const { BASE_API_URL, API_ROUTES } = ENV;
+import { ENV } from "../utils/constants";
+const { BASE_API_URL, API_ROUTER } = ENV;
 
 export class Auth{
     //Registro
-    signup = async (data) => {
-        const response = await fetch(`${BASE_API_URL}${API_ROUTES.AUTH}`, {
+    register = async (data) => {
+        console.log(data);
+        console.log("Hola");
+        const response = await fetch(`${BASE_API_URL}${API_ROUTER.REGISTER}`, {
+          mode: 'no-cors',
           method: "POST",
-          headers: {"Content-Type": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+          },
+          
           body: JSON.stringify(data),
         });
         try {
