@@ -21,16 +21,13 @@ const NavBar = () => {
                     <NavLink to="/about">¿Quienes somos?</NavLink>
                 </li>
                 <li>
+                    <NavLink to="/experiences">Experiencias significativas</NavLink>
+                </li>
+                <li>
                     <NavLink to="/services">Servicio</NavLink>
                 </li>
                 <li>
                     <NavLink to="/services">Contacto</NavLink>
-                </li>
-                <li className='special'>
-                    <NavLink to="/services">Ingresar</NavLink>
-                </li>
-                <li className='special'>
-                    <NavLink to="/services">Registrarse</NavLink>
                 </li>
             </ul>
         </nav>
