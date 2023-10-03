@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Auth } from '../../../api'
+import { Auth } from '../../../api/index';
 import userIcon from "../../../assets/icons/LoginIcons/person.png"
 import passIcon from "../../../assets/icons/LoginIcons/password.png"
 import "./LoginForm.css"
@@ -34,21 +34,33 @@ const LoginForm = () => {
     setUserPass(event.target.value)
   }
 
-  const handleSave = async () => {
-    errorHandle()
-    if(errorDoc.length === 0 || errorPass.length === 0){
-      const data = {
-          document: userDocument,
-          password: userPass,
-      }
-      try{
-        const response = await auth.login();
-        
-      }catch (error){
-          console.log(error);
-      } 
-    }
+  function logIn(){
+    
   }
+
+  const handleSave = async () => {
+    errorHandle();
+    
+    if (errorDoc.length === 0 && errorPass.length === 0) {
+      if (userDocument.trim() === "" || userPass.trim() === "") {
+        setErrorDoc("El campo de documento no puede estar vacío");
+        setErrorPass("El campo de contraseña no puede estar vacío");
+      } else {
+        const data = {
+          identification: userDocument,
+          password: userPass,
+        }
+        
+        try {
+          const response = await auth.login(data);
+        } catch (error) {
+          if (error.message !== "Unexpected end of input") {
+            setBackError(error);
+          }
+        }
+      }
+    }
+  }  
 
   return (
     <div className='main-container-login'>
@@ -84,6 +96,7 @@ const LoginForm = () => {
           </input>
         </div>
         {errorPass && <p className="error-message">{errorPass}</p>}
+        {backError && <p className="error-message">{backError.message}</p>}
       </form>
 
       <div className='forgot-pass'>
