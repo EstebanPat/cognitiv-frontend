@@ -1,11 +1,30 @@
 import React, { useState } from 'react'
+import { Auth } from '../../../api'
 import userIcon from "../../../assets/icons/LoginIcons/person.png"
 import passIcon from "../../../assets/icons/LoginIcons/password.png"
 import "./LoginForm.css"
 
 const LoginForm = () => {
+  const auth = new Auth();
   const [userDocument, setUserDocument] = useState("");
   const [userPass, setUserPass] = useState("");
+  const [errorDoc, setErrorDoc] = useState("");
+  const [errorPass, setErrorPass] = useState("");
+  const [backError, setBackError] = useState("");
+
+  function errorHandle(){
+    if(userDocument.length === 0){
+      setErrorDoc("El campo de documento no puede estar vacío")
+    }else{
+      setErrorDoc("")
+    }
+
+    if(userPass.length === 0){
+      setErrorPass("El campo de contraseña no puede estar vacío")
+    }else{
+      setErrorPass("")
+    }
+  }
 
   const handleSetDocument = (event) => {
     setUserDocument(event.target.value)
@@ -16,11 +35,19 @@ const LoginForm = () => {
   }
 
   const handleSave = async () => {
-    const data = {
-        document: userDocument,
-        password: userPass,
+    errorHandle()
+    if(errorDoc.length === 0 || errorPass.length === 0){
+      const data = {
+          document: userDocument,
+          password: userPass,
+      }
+      try{
+        const response = await auth.login();
+        
+      }catch (error){
+          console.log(error);
+      } 
     }
-    console.log(data);
   }
 
   return (
@@ -30,11 +57,10 @@ const LoginForm = () => {
       </div>
 
       <form className='form'>
-        <div className='input'>
+        <div className={`input ${errorDoc.length !== 0 ? 'error' : ''}`}>
           <img src={userIcon} alt=''></img>
           <input 
-            type="number" 
-            min={0} 
+            type="text" 
             id="document" 
             name="document" 
             className='text-input' 
@@ -43,8 +69,9 @@ const LoginForm = () => {
           >
           </input>
         </div>
+        {errorDoc && <p className="error-message">{errorDoc}</p>}
 
-        <div className='input'>
+        <div className={`input ${errorPass.length !== 0 ? 'error' : ''}`}>
           <img src={passIcon} alt=''></img>
           <input 
             type="password" 
@@ -56,6 +83,7 @@ const LoginForm = () => {
           >
           </input>
         </div>
+        {errorPass && <p className="error-message">{errorPass}</p>}
       </form>
 
       <div className='forgot-pass'>

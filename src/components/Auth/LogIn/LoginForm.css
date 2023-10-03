@@ -16,7 +16,7 @@
 
         & p{
             background:transparent;
-            font-size: 4.5rem;
+            font-size: 4.5em;
             font-weight: bold;
             color: #13511a;
         }
@@ -51,19 +51,30 @@
                 background: transparent;
                 border: none;
                 outline: none;
-                font-size: 17px;  
+                font-size: 1.063rem;  
             }
 
             .text-input::-webkit-outer-spin-button,
             .text-input::-webkit-inner-spin-button {
                 -webkit-appearance: none;
                 margin: 0;
-            }
+            }   
+        }
+
+        .error{
+            border-style: solid;
+            border-width: 2px;
+            border-color: red;
+        }
+
+        .error-message{
+            font-size: 14px;
+            color: red;
         }
     }
 
     .forgot-pass{
-        height: 10%;
+        height: 15%;
         display: flex;
         justify-content: center;
         align-items: center;
