@@ -159,7 +159,7 @@ const SignUp = () => {
             lastnames: lastnames,
             email: email,
             password: password,
-            birthDay: (birthDay.$M + 1) + '/' + birthDay.$D + '/' + birthDay.$y,
+            birthDay: birthDay.$y + '-' + (birthDay.$M + 1) + '-' + birthDay.$D   ,
             identification: identification,
             documentType: documentType.value,
             phone: phone,
@@ -180,8 +180,9 @@ const SignUp = () => {
         }
         
         console.log(data);
+        
         try{
-            const response = await auth.register();
+            const response = await auth.register(data);
             console.log(response);
         }catch (error){
             console.log(error);
