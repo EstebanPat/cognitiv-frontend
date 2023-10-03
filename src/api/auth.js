@@ -7,7 +7,6 @@ export class Auth{
         console.log(data);
         console.log("Hola");
         const response = await fetch(`${BASE_API_URL}${API_ROUTER.REGISTER}`, {
-          mode: 'no-cors',
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -15,9 +14,11 @@ export class Auth{
           
           body: JSON.stringify(data),
         });
+        console.log(response.statusText)
         try {
           if (response.status !== 201) {
-            throw new Error("Error al crear usuario");
+            const errorData = await response.json();
+            throw new Error(errorData.error);
           }
         } catch (error) {
           throw error;
