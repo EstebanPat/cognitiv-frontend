@@ -98,14 +98,15 @@
 
     .button-container{
         height: 10%;
-        width: 20%;
+        width: 50%;
+        gap: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .button{
-        background-color: #4CAF50; 
+        background-color: #357960; 
         border: none;
         color: white;
         padding: 10px 22px;
@@ -119,7 +120,7 @@
       
     .button:hover {
         cursor: pointer;
-        background-color: #437b45; 
+        background-color: #3bad3f; 
         color: white;
     }
 }

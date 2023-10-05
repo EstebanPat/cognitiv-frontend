@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Auth } from '../../../api/index';
 import userIcon from "../../../assets/icons/LoginIcons/person.png"
 import passIcon from "../../../assets/icons/LoginIcons/password.png"
-import "./LoginForm.css"
+import { Link } from "react-router-dom";
+import "./LoginForm.scss"
 
 const LoginForm = () => {
   const auth = new Auth();
@@ -17,11 +18,13 @@ const LoginForm = () => {
       setErrorDoc("El campo de documento no puede estar vacío")
     }else{
       setErrorDoc("")
+      setBackError("")
     }
 
     if(userPass.length === 0){
       setErrorPass("El campo de contraseña no puede estar vacío")
     }else{
+      setBackError("")
       setErrorPass("")
     }
   }
@@ -32,10 +35,6 @@ const LoginForm = () => {
 
   const handleSetPass = (event) => {
     setUserPass(event.target.value)
-  }
-
-  function logIn(){
-    
   }
 
   const handleSave = async () => {
@@ -104,7 +103,14 @@ const LoginForm = () => {
       </div>
 
       <div className='button-container'>
+        <a></a>
         <a className='button' onClick={handleSave}>Iniciar sesión</a>
+        {/* <Link to="/login" className='button' onClick={handleSave}>
+          Iniciar sesión
+        </Link> */}
+        <Link to="/register" className='button'>
+          Registrarse
+        </Link>
       </div>
     </div>
   )

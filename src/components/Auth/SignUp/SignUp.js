@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { Autocomplete, Button, Checkbox, FormControlLabel, IconButton, InputAdornment, OutlinedInput, Snackbar, TextField } from '@mui/material'
+import { Autocomplete, Button, Checkbox, FormControl, FormControlLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Snackbar, TextField } from '@mui/material'
 import MuiAlert from '@mui/material/Alert';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import "./SignUp.scss";
 import { Auth } from '../../../api/index';
+import logo from '../../../assets/images/global/logoSignUp.png'
+
+const textInputStyles = {
+    width:"100%",
+    input: {
+        fontSize: "1.063rem",
+    }
+};
 
 const SignUp = () => {
     const auth = new Auth()
@@ -19,7 +27,6 @@ const SignUp = () => {
     const [phoneAttendant, setPhoneAttendant] = useState('');
     const [emailAttendant, setEmailAttendant] = useState('');
 
-    
     const [names, setNames] = useState('');
     const [lastnames, setLastnames] = useState('');
     const [birthDay, setBirthDay] = useState(new Date());
@@ -36,7 +43,6 @@ const SignUp = () => {
     const [checkbox, setCheckbox] = useState('');
     const [checkboxOther, setCheckboxOther] = useState(false);
     const [showSecondForm, setShowSecondForm] = useState(false);
-
 
     /* Handle Functions for the attendant Information */
     const handleSetNamesAttendant = (event) => {
@@ -58,9 +64,7 @@ const SignUp = () => {
         setEmailAttendant(event.target.value)
     }
 
-
     /* Handle Functions for the user Information */
-
     const handleSetNames = (event) => {
         setNames(event.target.value)
     }
@@ -96,7 +100,6 @@ const SignUp = () => {
     }
 
     /* Handle Information IF there is not an attendant */
-
     const handleSetNamesMe = (value) => {
         setNames(value)
     }
@@ -126,7 +129,6 @@ const SignUp = () => {
     };
 
     /* Select the Person who is going to use Cognitiv */
-
     const handleCheckBoxes = (checkBox) => {
         setShowSecondForm(true);
         
@@ -208,32 +210,28 @@ const SignUp = () => {
         { value: "ES", label: "Educación Superior"}
     ]
   return (
-    <div> 
-        <div className='container'>
-            <div className='reg-container-one'>
-                <div className=''></div>
-            </div>
-            <div className='reg-container-two'>
-                
+    <div className='container'>
+            <div className='reg-container'>
                 <form>
                     <div className='reg-form'>
+                        <div className='logo'><img src={logo} className='logo-img'></img></div>
                         <div className='title-form'> <h2>Datos Personales</h2></div>
                         <div className='reg-form__row'>
-                            <TextField id="namesAttendant" label="Nombres" variant="outlined" className='input-auth-form' value={namesAttendant} onChange={handleSetNamesAttendant} sx={{width: 300}} />
-                            <TextField id="lastnamesAttendant" label="Apellidos" variant="outlined" className='input-auth-form'  value={lastnamesAttendant} onChange={handleSetLastnamesAttendant} sx={{width: 300}}/>
+                            <TextField sx={textInputStyles} id="namesAttendant" label="Nombres" variant="outlined" className='input-auth-form' value={namesAttendant} onChange={handleSetNamesAttendant} />
+                            <TextField sx={textInputStyles} id="lastnamesAttendant" label="Apellidos" variant="outlined" className='input-auth-form'  value={lastnamesAttendant} onChange={handleSetLastnamesAttendant} />
                         </div>
                         
                         <div className='reg-form__row'>
                             <LocalizationProvider dateAdapter={AdapterDayjs}  >
-                                <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDayAttendant}  onChange={handleSetBirthdayAttendant} sx={{ width: 300 }} />
+                                <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDayAttendant}  onChange={handleSetBirthdayAttendant}  sx={textInputStyles} />
                             </LocalizationProvider>
-                            <TextField id="identificationAttendant" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identificationAttendant}  onChange={handleSetIdentificationAttendant} sx={{width: 300}}/>
+                            <TextField id="identificationAttendant" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identificationAttendant}  onChange={handleSetIdentificationAttendant} sx={textInputStyles}/>
                         </div>
                         
                         
                         <div className='reg-form__row'>
-                            <TextField id="emailAttendant" label="Correo Electronico" variant="outlined" className='input-auth-form' value={emailAttendant} onChange={handleSetEmailAttendant} sx={{width: 300}}/>
-                            <TextField id="phoneAttendant" label="Telefono" variant="outlined" className='input-auth-form' value={phoneAttendant} onChange={handleSetPhoneAttendant} sx={{width: 300}}/>
+                            <TextField id="emailAttendant" label="Correo Electronico" variant="outlined" className='input-auth-form' value={emailAttendant} onChange={handleSetEmailAttendant} sx={textInputStyles}/>
+                            <TextField id="phoneAttendant" label="Telefono" variant="outlined" className='input-auth-form' value={phoneAttendant} onChange={handleSetPhoneAttendant} sx={textInputStyles}/>
                             
                         </div>
                     </div>
@@ -241,8 +239,8 @@ const SignUp = () => {
 
                 <div className='title-form'> <h2>¿Quien usará COGNITIV?</h2></div>
                 <div className='reg-checkbox'>
-                    <FormControlLabel checked={checkboxMe} name='checkboxMe' onChange={() => handleCheckBoxes('checkboxMe')} control={<Checkbox />} label="YO" />
-                    <FormControlLabel checked={checkboxOther} name='checkboxOther' onChange={() => handleCheckBoxes('checkboxOther')} control={<Checkbox />} label="Otra Persona" />
+                    <FormControlLabel checked={checkboxMe} name='checkboxMe' onChange={() => handleCheckBoxes('checkboxMe')} control={<Checkbox className='checkbox' />} label="Yo" />
+                    <FormControlLabel checked={checkboxOther} name='checkboxOther' onChange={() => handleCheckBoxes('checkboxOther')} control={<Checkbox className='checkbox' />} label="Otra Persona" />
                 </div>
                 
                 {showSecondForm && (
@@ -252,8 +250,8 @@ const SignUp = () => {
                                 <div className='reg-form'>
                                     <div className='title-form'> <h2>Datos del Usuario</h2></div>
                                     <div className='reg-form__row'>
-                                        <TextField id="names" label="Nombres" variant="outlined" className='input-auth-form' value={names} onChange={handleSetNames} sx={{width: 300}} />
-                                        <TextField id="lastnames" label="Apellidos" variant="outlined" className='input-auth-form'  value={lastnames} onChange={handleSetLastnames} sx={{width: 300}}/>
+                                        <TextField id="names" label="Nombres" variant="outlined" className='input-auth-form' value={names} onChange={handleSetNames} sx={textInputStyles} />
+                                        <TextField id="lastnames" label="Apellidos" variant="outlined" className='input-auth-form'  value={lastnames} onChange={handleSetLastnames} sx={textInputStyles}/>
                                     </div>
                                     
                                     <div className='reg-form__row'>
@@ -261,18 +259,18 @@ const SignUp = () => {
                                             disablePortal
                                             id="combo-box-demo"
                                             options={documentTypeOptions}
-                                            sx={{ width: 300 }}
+                                             sx={textInputStyles}
                                             renderInput={(params) => <TextField {...params} label="Tipo de Documento" />}
                                             value={documentType}
                                             onChange={handleSetDocumentType}
                                         />                  
-                                        <TextField id="identification" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identification}  onChange={handleSetIdentification} sx={{width: 300}}/>
+                                        <TextField id="identification" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identification}  onChange={handleSetIdentification} sx={textInputStyles}/>
                                     </div>
                                     <div className='reg-form__row'>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}  >
-                                            <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDay}  onChange={handleSetBirthday} sx={{ width: 300 }} />
+                                            <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDay}  onChange={handleSetBirthday}  sx={textInputStyles} />
                                         </LocalizationProvider>
-                                        <TextField id="phone" label="Telefono" variant="outlined" className='input-auth-form' value={phone} onChange={handleSetPhone} sx={{width: 300}}/>
+                                        <TextField id="phone" label="Telefono" variant="outlined" className='input-auth-form' value={phone} onChange={handleSetPhone} sx={textInputStyles}/>
                                     </div>
                                     
                                     <div className='reg-form__row'>
@@ -281,7 +279,7 @@ const SignUp = () => {
                                             id="combo-box-demo"
                                             margin="normal"
                                             options={genreOptions}
-                                            sx={{ width: 300 }}
+                                             sx={textInputStyles}
                                             renderInput={(params) => <TextField {...params} label="Sexo" />}
                                             value={genre}
                                             onChange={handleSetGenre}
@@ -291,37 +289,36 @@ const SignUp = () => {
                                             id="combo-box-demo"
                                             margin="normal"
                                             options={schoolingOptions}
-                                            sx={{ width: 300 }}
+                                             sx={textInputStyles}
                                             renderInput={(params) => <TextField {...params} label="Nivel de Escolaridad" />}
                                             value={schooling}
                                             onChange={handleSetSchooling}
                                         />       
                                     </div>
                                     <div className='reg-form__row'>
-                                        <TextField id="email" label="Correo Electronico" variant="outlined" className='input-auth-form' value={email} onChange={handleSetEmail} sx={{width: 300}}/>
-                                        
-                                        <OutlinedInput
-                                            sx={{ width: 300 }}
-                                            id="outlined-adornment-password"
-                                            label="Password"
-                                            type={showPassword ? 'text' : 'password'}
-                                            endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                                >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                            }
-                                            
-                                            value={password}
-                                            onChange={handleSetPassword}
-                                            InputLabelProps={{ shrink: true }}
-                                        />
+                                        <TextField id="email" label="Correo Electronico" variant="outlined" className='input-auth-form' value={email} onChange={handleSetEmail} sx={textInputStyles}/>
+                                        <FormControl sx={textInputStyles}>
+                                            <InputLabel htmlFor="outlined-adornment-confirm-password">Contraseña</InputLabel>
+                                            <OutlinedInput
+                                                id="outlined-adornment-password"
+                                                label="Contraseña"
+                                                type={showPassword ? 'text' : 'password'}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            onClick={handleClickShowPassword}
+                                                            onMouseDown={handleMouseDownPassword}
+                                                            edge="end"
+                                                        >
+                                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                                value={password}
+                                                onChange={handleSetPassword}
+                                            />
+                                        </FormControl>
                                     </div>
                                 </div>
                             </div>
@@ -330,18 +327,12 @@ const SignUp = () => {
                 )}
                 
                 <div className='reg-button'>
-                    <Button variant="contained" color="success" onClick={handleSave}>
+                    <Button variant="contained" style={{background:"#357960", borderRadius: "10px"}} onClick={handleSave}>
                         Registrese en Cognitiv
                     </Button>
-
                 </div>
-                
             </div>
         </div>
-        
-
-      
-    </div>
   )
 }
 

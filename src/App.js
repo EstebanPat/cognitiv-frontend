@@ -1,11 +1,21 @@
-import logo from './logo.svg';
 import WelcomeView from './screens/WelcomeView';
-import SignUp from './components/Auth/SignUp/SignUp';
+import RegisterView from './screens/RegisterView';
+import { Routes, Route} from "react-router-dom";
+import NavBar from "./components/Surfaces/NavBar"
+import "./App.scss"
 
 function App() {
   return (
     <div className='app-container'>
-      <WelcomeView />
+      <div className='nav-container'>
+        <NavBar/>
+      </div>
+
+      <Routes>
+        <Route path='/' element={<WelcomeView />}></Route>
+        <Route path='/register' element={<RegisterView />} >
+        </Route>
+      </Routes>
     </div>
   );
 };
