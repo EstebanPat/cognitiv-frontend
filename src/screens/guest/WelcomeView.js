@@ -4,6 +4,7 @@ import LoginForm from '../../components/Auth/LogIn/LoginForm'
 import image1 from "../../assets/images/home/welcome.png"
 import NavBar from '../../components/Surfaces/NavBar'
 import WhoWeAre from "./WhoWeAre";
+import Team from './Team'
 
 
 const WelcomeView = () => {
@@ -22,8 +23,12 @@ const WelcomeView = () => {
         </div>
       </div> 
 
-      <div className='about-container'>
+      <div className='about-container' id='aboutUs'>
         <WhoWeAre></WhoWeAre>
+      </div>
+
+      <div className='team-container' id='team'>
+        <Team></Team>
       </div>
       
     </div>
