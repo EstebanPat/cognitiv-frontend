@@ -1,0 +1,198 @@
+.about-us{
+    width: 100%;
+    height: 1500px;
+    margin-bottom: 10px;
+
+    & .about-row{
+        width: 100%;
+        height: 33%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-color: #357960 ;
+
+        & .about-content{
+            width: 60%;
+            height: 100%;
+            background-color: #357960 ;  
+            color: #FEFEFA;
+
+            & p:first-of-type {
+                font-size: 3rem;
+                margin: 3rem;
+                margin-top: 7%;
+
+            }
+            
+            & p:nth-child(2) {
+                font-size: 1.2rem;
+                margin: 3rem;
+                margin-top: 5%;
+                font-weight: bold;
+            }
+
+            & p:nth-child(3) {
+                text-align: justify;
+                text-justify: inter-word;
+                font-size: 1.2rem;
+                margin: 3rem;
+                margin-top: 3%;
+            }
+
+            & p:nth-child(4) {
+                font-size: 1.1rem;
+                margin: 3rem;
+                margin-top: 3%;
+            }
+        }
+
+        & .about-image{
+            width: 35%;
+            height: 90%;
+            background-color: #FEFEFA;  
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 150px 0 100px;
+            margin-top: 1.5%;
+            margin-left: 1.5%;
+
+            & img{
+                width: 90%;
+            }
+        }
+    }
+
+    & .about-books{
+        width: 100%;
+        height: 45%;
+        background-color: #FEFEFA;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        & .book-one{
+            width: 50%;
+            height: 100%;
+
+            .book-one-image{
+                height: 60%;
+                display: flex;
+                justify-content: center;
+                & img{
+                    border-radius: 10px;
+                    border: 6px solid #357960;
+                    width: 45%;
+                }
+            }
+
+            .book-one-text{
+                width: 100%;
+                height: 15%;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+               
+
+                & p:first-of-type {
+                    text-align: center;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    margin-left: 5rem;
+                    margin-right: 5rem;
+                }
+            } 
+
+            .book-one-text-one{
+                & p:first-of-type {
+                    text-align: justify;
+                    font-size: 1rem;
+                    margin-top: 4%;
+                    margin-left: 4.5rem;
+                    margin-right: 4.5rem;
+                }
+            }
+        }
+
+        & .book-two{
+            width: 50%;
+            height: 100%;
+
+            .book-two-image{
+                display: flex;
+                justify-content: center;
+                height: 60%;
+                & img{
+                    border-radius: 10px;
+                    border: 6px solid #357960;
+                    width: 45%;
+                }
+            }
+
+            .book-two-text{
+                width: 100%;
+                height: 15%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                & p:first-of-type {
+                    text-align: center;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    margin-left: 1.2rem;
+                    margin-right: 1.2rem;
+                }
+            }
+
+            .book-two-text-two{
+                & p:first-of-type {
+                    text-align: justify;
+                    font-size: 1rem;
+                    margin-top: 4%;
+                    margin-left: 4.5rem;
+                    margin-right: 4.5rem;
+                }
+            }
+
+            
+        }
+    }
+
+    & .info{
+        width: 100%;
+        height: 22%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #357960;
+        color: #FEFEFA;
+
+        & p:first-of-type {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+
+        & p:nth-child(2){
+            margin-top: 2%;
+            text-align: justify;
+            font-size: 1rem;
+            margin-left: 5rem;
+            margin-right: 5rem;
+        }
+
+        & p:nth-child(3){
+            margin-top: 2%;
+            text-align: center;
+            font-size: 1rem;
+            margin-left: 6rem;
+            margin-right: 6rem;
+        }
+    }
+
+}
