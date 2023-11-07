@@ -10,5 +10,7 @@ export const ENV = {
     API_ROUTER:{
         REGISTER: "users/signup",
         USERS: "users/",
+        MEMBERSHIPS: "memberships/",
+        SUSCRIPTIONS: "suscriptions/new-suscription"
     }
 }
