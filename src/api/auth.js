@@ -26,5 +26,25 @@ export class Auth{
       };
 
     //Autenticacion 
+    login = async (data) => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.LOGIN}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          const { access } = await response.json();
+          localStorage.setItem(ENV.JWT.ACCESS, access)
+        }
+      } catch (error) {
+        throw error;
+      }
+    };
     //Obtener Usuario logeado 
 }

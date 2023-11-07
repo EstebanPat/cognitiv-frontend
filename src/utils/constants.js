@@ -8,9 +8,14 @@ export const ENV = {
     //Encabezado rutas para almacenamiento, edicion, y eliminacion de archivos 
     BASE_URL: SERVER_IP,
     API_ROUTER:{
+        LOGIN: "users/login",
         REGISTER: "users/signup",
         USERS: "users/",
         MEMBERSHIPS: "memberships/",
         SUSCRIPTIONS: "suscriptions/new-suscription"
+    },
+    JWT: {
+        ACCESS: "access",
+        REFRESH: "refresh"
     }
 }

@@ -1,9 +1,65 @@
 import React, { useState } from 'react'
+import { Auth } from '../../../api/index';
 import userIcon from "../../../assets/icons/LoginIcons/person.png"
 import passIcon from "../../../assets/icons/LoginIcons/password.png"
-import "./LoginForm.css"
+import { Link } from "react-router-dom";
+import "./LoginForm.scss"
 
 const LoginForm = () => {
+  const auth = new Auth();
+  const [userDocument, setUserDocument] = useState("");
+  const [userPass, setUserPass] = useState("");
+  const [errorDoc, setErrorDoc] = useState("");
+  const [errorPass, setErrorPass] = useState("");
+  const [backError, setBackError] = useState("");
+
+  function errorHandle(){
+    if(userDocument.length === 0){
+      setErrorDoc("El campo de documento no puede estar vacío")
+    }else{
+      setErrorDoc("")
+      setBackError("")
+    }
+
+    if(userPass.length === 0){
+      setErrorPass("El campo de contraseña no puede estar vacío")
+    }else{
+      setBackError("")
+      setErrorPass("")
+    }
+  }
+
+  const handleSetDocument = (event) => {
+    setUserDocument(event.target.value)
+  }
+
+  const handleSetPass = (event) => {
+    setUserPass(event.target.value)
+  }
+
+  const handleSave = async () => {
+    errorHandle();
+    
+    if (errorDoc.length === 0 && errorPass.length === 0) {
+      if (userDocument.trim() === "" || userPass.trim() === "") {
+        setErrorDoc("El campo de documento no puede estar vacío");
+        setErrorPass("El campo de contraseña no puede estar vacío");
+      } else {
+        const data = {
+          identification: userDocument,
+          password: userPass,
+        }
+        
+        try {
+          const response = await auth.login(data);
+        } catch (error) {
+          if (error.message !== "Unexpected end of input") {
+            setBackError(error);
+          }
+        }
+      }
+    }
+  }  
 
   return (
     <div className='main-container-login'>
@@ -12,29 +68,34 @@ const LoginForm = () => {
       </div>
 
       <form className='form'>
-        <div className='input'>
+        <div className={`input ${errorDoc.length !== 0 ? 'error' : ''}`}>
           <img src={userIcon} alt=''></img>
           <input 
-            type="number" 
-            min={0} 
+            type="text" 
             id="document" 
             name="document" 
             className='text-input' 
             placeholder='Documento'
+            onChange={handleSetDocument}
           >
           </input>
         </div>
+        {errorDoc && <p className="error-message">{errorDoc}</p>}
 
-        <div className='input'>
+        <div className={`input ${errorPass.length !== 0 ? 'error' : ''}`}>
           <img src={passIcon} alt=''></img>
           <input 
             type="password" 
             id="password" 
             name="password" 
             className='text-input' 
-            placeholder='Contraseña'>
+            placeholder='Contraseña'
+            onChange={handleSetPass}
+          >
           </input>
         </div>
+        {errorPass && <p className="error-message">{errorPass}</p>}
+        {backError && <p className="error-message">{backError.message}</p>}
       </form>
 
       <div className='forgot-pass'>
@@ -42,7 +103,14 @@ const LoginForm = () => {
       </div>
 
       <div className='button-container'>
-        <a className='button'>Iniciar sesión</a>
+        <a></a>
+        <a className='button' onClick={handleSave}>Iniciar sesión</a>
+        {/* <Link to="/login" className='button' onClick={handleSave}>
+          Iniciar sesión
+        </Link> */}
+        <Link to="/register" className='button'>
+          Registrarse
+        </Link>
       </div>
     </div>
   )
