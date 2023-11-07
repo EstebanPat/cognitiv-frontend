@@ -14,7 +14,7 @@ const WelcomeView = () => {
         <NavBar/>
       </div>
 
-      <div className='log-container'>
+      <div className='log-container' id='login'>
         <div className='image-container'>
           <img src={image1} className='main-image' alt='welcomeImage'></img>
         </div>

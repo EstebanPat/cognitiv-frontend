@@ -12,6 +12,7 @@ nav {
         margin: 1rem;
         font-weight: bold;
         text-decoration: none;
+        cursor: pointer;
 
         & .logo{
             max-width: 15rem;

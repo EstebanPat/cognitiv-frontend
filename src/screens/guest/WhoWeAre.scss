@@ -79,10 +79,14 @@
                 height: 60%;
                 display: flex;
                 justify-content: center;
-                & img{
-                    border-radius: 10px;
-                    border: 6px solid #357960;
-                    width: 45%;
+                & a {
+                    display: flex;
+                    justify-content: center;
+                    & img{
+                        border-radius: 10px;
+                        border: 6px solid #357960;
+                        width: 100%;
+                    }
                 }
             }
 
@@ -122,10 +126,14 @@
                 display: flex;
                 justify-content: center;
                 height: 60%;
-                & img{
-                    border-radius: 10px;
-                    border: 6px solid #357960;
-                    width: 45%;
+                & a {
+                    display: flex;
+                    justify-content: center;
+                    & img{
+                        border-radius: 10px;
+                        border: 6px solid #357960;
+                        width: 100%;
+                    }
                 }
             }
 

@@ -1,6 +1,6 @@
 import "./App.scss"
 import WelcomeView from "./screens/guest/WelcomeView";
-import Team from "../src/screens/guest/Team"
+import Experiences from "../src/screens/guest/Experiences"
 
 function App() {
   return (

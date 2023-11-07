@@ -8,7 +8,7 @@ const NavBar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav>
-        <Link to="/" className="title">
+        <Link to={"login"} smooth={true} offset={-110} duration={500} className='title'>
             <img src={logo} alt='' className='logo'></img>
         </Link>
         <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>

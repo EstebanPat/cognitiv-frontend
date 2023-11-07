@@ -20,6 +20,7 @@ const Team = () => {
             Con más de 10 años de experiencia trabajando <br/>por la calidad de vida del adulto mayor <br/>
             </>
           }
+          link="https://co.linkedin.com/in/carolina-marquez-narvaez"
         />
 
         <ActionAreaCard
@@ -33,6 +34,7 @@ const Team = () => {
             Con más de 10 años de experiencia <br/>  trabajando por la calidad de vida del adulto mayor
             </>
           }
+          link="https://co.linkedin.com/in/samurillore"
         />
       </div>
 

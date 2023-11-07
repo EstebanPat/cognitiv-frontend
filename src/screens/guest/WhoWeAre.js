@@ -40,7 +40,9 @@ const WhoWeAre = () => {
                     </p>
                 </div>
                 <div className='book-one-image'>
-                    <img src={book1} alt='' className='logo'></img>
+                    <a href='https://editorial.autonoma.edu.co/index.php/libros/catalog/book/50' target='_blank'>
+                        <img src={book1} alt=''></img>
+                    </a>
                 </div>
                 <div className='book-one-text-one'>
                     <p>
@@ -59,7 +61,10 @@ const WhoWeAre = () => {
                 </div>
                     
                 <div className='book-two-image'>
-                    <img src={book2} alt='' className='logo'></img>
+                    <a href='https://editorial.autonoma.edu.co/index.php/libros/catalog/view/63/66/390' target='_blank'>
+                        <img src={book2} alt=''></img>
+                    </a>
+                    
                 </div>
                 <div className='book-two-text-two'>
 
