@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import "./NavBar.css"
 import logo from "../../assets/images/global/logoNav.png"
-import { Link, NavLink } from "react-router-dom";
+import { Link } from 'react-scroll';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav>
-        <Link to="/" className="title">
+        <Link to={"login"} smooth={true} offset={-110} duration={500} className='title'>
             <img src={logo} alt='' className='logo'></img>
         </Link>
         <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
@@ -17,14 +18,21 @@ const NavBar = () => {
         </div>
         <ul className={menuOpen ? "open" : ""}>
             <li>
-                <NavLink to="/about">¿Quienes somos?</NavLink>
+                <Link to={"aboutUs"} smooth={true} offset={-100} duration={500}>
+                  ¿Quienes somos?
+                </Link>
             </li>
+
+            <li>
+                <Link to={"aboutUs"} smooth={true} offset={1450} duration={500}>
+                  Equipo
+                </Link>
+            </li>
+
             <li>
                 <NavLink to="/experiences">Experiencias significativas</NavLink>
             </li>
-            <li>
-                <NavLink to="/services">Servicio</NavLink>
-            </li>
+            
             <li>
                 <NavLink to="/services">Contacto</NavLink>
             </li>

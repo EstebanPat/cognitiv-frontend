@@ -108,7 +108,7 @@ const LoginForm = () => {
         {/* <Link to="/login" className='button' onClick={handleSave}>
           Iniciar sesión
         </Link> */}
-        <Link to="/register" className='button'>
+        <Link to="/signup" className='button'>
           Registrarse
         </Link>
       </div>

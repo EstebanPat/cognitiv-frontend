@@ -12,6 +12,7 @@ nav {
         margin: 1rem;
         font-weight: bold;
         text-decoration: none;
+        cursor: pointer;
 
         & .logo{
             max-width: 15rem;
@@ -23,6 +24,7 @@ nav {
 
         & li {
             list-style: none; 
+            cursor: pointer;
 
             & a {
                 font-size: 1.2rem;
