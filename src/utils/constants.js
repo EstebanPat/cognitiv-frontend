@@ -11,6 +11,8 @@ export const ENV = {
         LOGIN: "users/login",
         REGISTER: "users/signup",
         USERS: "users/",
+        MEMBERSHIPS: "memberships/",
+        SUSCRIPTIONS: "suscriptions/new-suscription"
     },
     JWT: {
         ACCESS: "access",
