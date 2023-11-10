@@ -56,7 +56,7 @@ const WhoWeAre = () => {
             <div className='book-two'>
                 <div className='book-two-text'>
                     <p>
-                        Cartilla "Deterioro cognitivo leve: Manual para cuidadores":
+                        Cartilla "Deterioro cognitivo leve: <br/> Manual para cuidadores":
                     </p>
                 </div>
                     

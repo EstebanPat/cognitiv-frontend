@@ -9,7 +9,7 @@ export default function ActionAreaCard(props) {
   const { image, title, description, description2, content, link} = props;
 
   return (
-    <Card sx={{ maxWidth: "400px", minHeight: "600px", borderRadius:15 }} >
+    <Card sx={{ maxWidth: "400px", minHeight: "600px", borderRadius:7}} >
       <CardActionArea component="a" href={link} target='_blank'>
         <CardMedia
           component="img"

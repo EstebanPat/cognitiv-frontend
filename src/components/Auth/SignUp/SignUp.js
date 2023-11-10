@@ -210,7 +210,7 @@ const SignUp = () => {
         { value: "ES", label: "Educación Superior"}
     ]
   return (
-    <div className='container'>
+    <div className='reg-main-container'>
             <div className='reg-container'>
                 <form>
                     <div className='reg-form'>
