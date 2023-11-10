@@ -11,6 +11,7 @@ const NavBar = () => {
         <Link to={"login"} smooth={true} offset={-110} duration={500} className='title'>
             <img src={logo} alt='' className='logo'></img>
         </Link>
+
         <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
             <span></span>
             <span></span>
@@ -24,17 +25,13 @@ const NavBar = () => {
             </li>
 
             <li>
-                <Link to={"aboutUs"} smooth={true} offset={1450} duration={500}>
+                <Link to={"team"} smooth={true} offset={-30} duration={500}>
                   Equipo
                 </Link>
             </li>
 
             <li>
                 <NavLink to="/experiences">Experiencias significativas</NavLink>
-            </li>
-            
-            <li>
-                <NavLink to="/services">Contacto</NavLink>
             </li>
         </ul>
     </nav>

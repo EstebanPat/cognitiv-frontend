@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Typography, Button, Box, Input } from '@mui/material';
 import { Suscription } from '../../api/suscriptions';
+
 const MembershipModal = ({ membership, closeModal}) => {
   const suscription = new Suscription();
   const [membershipId, setMembershipId] = useState(null)
