@@ -39,7 +39,6 @@ const LoginForm = () => {
 
   const handleSave = async () => {
     errorHandle();
-    
     if (errorDoc.length === 0 && errorPass.length === 0) {
       if (userDocument.trim() === "" || userPass.trim() === "") {
         setErrorDoc("El campo de documento no puede estar vacío");
@@ -105,9 +104,6 @@ const LoginForm = () => {
       <div className='button-container'>
         <a></a>
         <a className='button' onClick={handleSave}>Iniciar sesión</a>
-        {/* <Link to="/login" className='button' onClick={handleSave}>
-          Iniciar sesión
-        </Link> */}
         <Link to="/signup" className='button'>
           Registrarse
         </Link>
