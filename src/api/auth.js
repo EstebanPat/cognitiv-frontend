@@ -4,8 +4,6 @@ const { BASE_API_URL, API_ROUTER } = ENV;
 export class Auth{
     //Registro
     register = async (data) => {
-        console.log(data);
-        console.log("Hola");
         const response = await fetch(`${BASE_API_URL}${API_ROUTER.REGISTER}`, {
           method: "POST",
           headers: {
@@ -14,11 +12,13 @@ export class Auth{
           
           body: JSON.stringify(data),
         });
-        console.log(response.statusText)
         try {
           if (response.status !== 201) {
             const errorData = await response.json();
             throw new Error(errorData.error);
+          }else{
+            const responseData = await response.json();
+            return responseData._id
           }
         } catch (error) {
           throw error;
@@ -46,5 +46,22 @@ export class Auth{
         throw error;
       }
     };
-    //Obtener Usuario logeado 
+
+    getUserById = async (userId) => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.USERS}/${userId}`, {
+        method: "GET",
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          const user = await response.json();
+          return user
+        }
+      } catch (error) {
+        throw error;
+      }
+    }
+
 }

@@ -8,6 +8,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import "./SignUp.scss";
 import { Auth } from '../../../api/index';
 import logo from '../../../assets/images/global/logoSignUp.png'
+import { useNavigate } from "react-router-dom";
 
 const textInputStyles = {
     width:"100%",
@@ -18,7 +19,9 @@ const textInputStyles = {
 
 const SignUp = () => {
     const auth = new Auth()
-
+    const navigate = useNavigate();
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [openSnackbarDuplicated, setOpenSnackbarDuplicated] = useState(false);
     /* Information of the Attendant (if the user needs one) */
     const [namesAttendant, setNamesAttendant] = useState('');
     const [lastnamesAttendant, setLastnamesAttendant] = useState('');
@@ -37,7 +40,6 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [genre, setGenre] = useState('');
     const [schooling, setSchooling] = useState('');
-    const [laterality, setLaterality] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [checkboxMe, setCheckboxMe] = useState(false);
     const [checkbox, setCheckbox] = useState('');
@@ -48,18 +50,23 @@ const SignUp = () => {
     const handleSetNamesAttendant = (event) => {
         setNamesAttendant(event.target.value)
     }
+
     const handleSetLastnamesAttendant = (event) => {
         setLastnamesAttendant(event.target.value)
     }
+
     const handleSetBirthdayAttendant = (date) => {
         setBirthDayAttendant(date)
     }
+
     const handleSetIdentificationAttendant = (event) => {
         setIdentificationAttendant(event.target.value)
     }
+
     const handleSetPhoneAttendant = (event) => {
         setPhoneAttendant(event.target.value)
     }
+
     const handleSetEmailAttendant = (event) => {
         setEmailAttendant(event.target.value)
     }
@@ -72,15 +79,19 @@ const SignUp = () => {
     const handleSetLastnames = (event) => {
         setLastnames(event.target.value)
     }
+
     const handleSetBirthday = (date) => {
         setBirthDay(date)
     }
+
     const handleSetIdentification = (event) => {
         setIdentification(event.target.value)
     }
+
     const handleSetPhone = (event) => {
         setPhone(event.target.value)
     }
+
     const handleSetEmail = (event) => {
         setEmail(event.target.value)
     }
@@ -92,9 +103,11 @@ const SignUp = () => {
     const handleSetPassword = (event) => {
         setPassword(event.target.value)
     }
+
     const handleSetGenre = (event, sex) => {
         setGenre(sex)
     }
+
     const handleSetSchooling = (event, school) => {
         setSchooling(school)
     }
@@ -103,18 +116,23 @@ const SignUp = () => {
     const handleSetNamesMe = (value) => {
         setNames(value)
     }
+
     const handleSetLastnamesMe = (value) => {
         setLastnames(value)
     }
+
     const handleSetBirthdayMe = (date) => {
         setBirthDay(date)
     }
+
     const handleSetIdentificationMe = (value) => {
         setIdentification(value)
     }
+
     const handleSetPhoneMe = (value) => {
         setPhone(value)
     }
+
     const handleSetEmailMe = (value) => {
         setEmail(value)
     }
@@ -130,23 +148,23 @@ const SignUp = () => {
 
     /* Select the Person who is going to use Cognitiv */
     const handleCheckBoxes = (checkBox) => {
-        setShowSecondForm(true);
-        
-        if(checkBox === 'checkboxMe'){
+        if (checkBox === 'checkboxMe') {
+            setShowSecondForm(!checkboxMe);
             setCheckbox(checkBox);
             setCheckboxMe(!checkboxMe);
-            if(checkboxOther) setCheckboxOther(false);
-            handleSetNamesMe(namesAttendant)
+            if (checkboxOther) setCheckboxOther(false);
+            handleSetNamesMe(namesAttendant);
             handleSetLastnamesMe(lastnamesAttendant);
             handleSetBirthdayMe(birthDayAttendant);
             handleSetIdentificationMe(identificationAttendant);
             handleSetPhoneMe(phoneAttendant);
             handleSetEmailMe(emailAttendant);
-        }else if(checkBox === 'checkboxOther'){
+        } else if (checkBox === 'checkboxOther') {
             setCheckbox(checkBox);
             setCheckboxOther(!checkboxOther);
-            if(checkboxMe) setCheckboxMe(false);
-            handleSetNamesMe('')
+            setShowSecondForm(!checkboxOther);  // Cambiar a !checkboxOther
+            if (checkboxMe) setCheckboxMe(false);
+            handleSetNamesMe('');
             handleSetLastnamesMe('');
             handleSetBirthdayMe('');
             handleSetIdentificationMe('');
@@ -155,7 +173,32 @@ const SignUp = () => {
         }
     }
 
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
     const handleSave = async () => {
+        // Validar campos antes de enviar el formulario
+        if (
+            !names ||
+            !lastnames ||
+            !birthDay ||
+            !identification ||
+            !phone ||
+            !email ||
+            !documentType ||
+            !password ||
+            !genre ||
+            !schooling ||
+            (showSecondForm && (!namesAttendant || !lastnamesAttendant || !birthDayAttendant || !identificationAttendant || !phoneAttendant || !emailAttendant))
+        ) {
+            setOpenSnackbar(true);
+            return;
+        }
+
         const data = {
             names: names,
             lastnames: lastnames,
@@ -180,17 +223,15 @@ const SignUp = () => {
             }
             data.attendant = attendant
         }
-        
-        console.log(data);
-        
-        try{
+
+        try {
             const response = await auth.register(data);
-            console.log(response);
-        }catch (error){
+            navigate('/signup/membership', { state: { userId: response } });
+        } catch (error) {
+            setOpenSnackbarDuplicated(true)
             console.log(error);
-        }       
-        
-    }
+        }
+    };
 
     const documentTypeOptions = [
         { value: "CC", label: "Cedula de ciudadanía"},
@@ -198,105 +239,102 @@ const SignUp = () => {
         { value: "TI", label: "Tarjeta de Identidad"},
         { value: "Pasaporte", label: "Pasaporte"}
     ]
+
     const genreOptions = [
         { value: "M", label: "Hombre"},
         { value: "F", label: "Mujer"},
         { value: "U", label: "Indefinido"}
     ]
+
     const schoolingOptions = [
         { value: "EP", label: "Educación Preescolar"},
         { value: "EB", label: "Edcación Básica"},
         { value: "EM", label: "Educación Media"},
         { value: "ES", label: "Educación Superior"}
     ]
-  return (
-    <div className='reg-main-container'>
+
+    return (
+        <div className='reg-main-container'>
             <div className='reg-container'>
                 <form>
                     <div className='reg-form'>
                         <div className='logo'><img src={logo} className='logo-img'></img></div>
-                        <div className='title-form'> <h2>Datos Personales</h2></div>
+                        <div className='title-form'><h2>Datos Personales</h2></div>
                         <div className='reg-form__row'>
                             <TextField sx={textInputStyles} id="namesAttendant" label="Nombres" variant="outlined" className='input-auth-form' value={namesAttendant} onChange={handleSetNamesAttendant} />
-                            <TextField sx={textInputStyles} id="lastnamesAttendant" label="Apellidos" variant="outlined" className='input-auth-form'  value={lastnamesAttendant} onChange={handleSetLastnamesAttendant} />
+                            <TextField sx={textInputStyles} id="lastnamesAttendant" label="Apellidos" variant="outlined" className='input-auth-form' value={lastnamesAttendant} onChange={handleSetLastnamesAttendant} />
                         </div>
-                        
                         <div className='reg-form__row'>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}  >
-                                <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDayAttendant}  onChange={handleSetBirthdayAttendant}  sx={textInputStyles} />
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDayAttendant} onChange={handleSetBirthdayAttendant} sx={textInputStyles} />
                             </LocalizationProvider>
-                            <TextField id="identificationAttendant" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identificationAttendant}  onChange={handleSetIdentificationAttendant} sx={textInputStyles}/>
+                            <TextField id="identificationAttendant" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identificationAttendant} onChange={handleSetIdentificationAttendant} sx={textInputStyles} />
                         </div>
-                        
-                        
                         <div className='reg-form__row'>
-                            <TextField id="emailAttendant" label="Correo Electronico" variant="outlined" className='input-auth-form' value={emailAttendant} onChange={handleSetEmailAttendant} sx={textInputStyles}/>
-                            <TextField id="phoneAttendant" label="Telefono" variant="outlined" className='input-auth-form' value={phoneAttendant} onChange={handleSetPhoneAttendant} sx={textInputStyles}/>
-                            
+                            <TextField id="emailAttendant" label="Correo Electronico" variant="outlined" className='input-auth-form' value={emailAttendant} onChange={handleSetEmailAttendant} sx={textInputStyles} />
+                            <TextField id="phoneAttendant" label="Telefono" variant="outlined" className='input-auth-form' value={phoneAttendant} onChange={handleSetPhoneAttendant} sx={textInputStyles} />
                         </div>
                     </div>
                 </form>
-
-                <div className='title-form'> <h2>¿Quien usará COGNITIV?</h2></div>
+    
+                <div className='title-form'><h2>¿Quien usará COGNITIV?</h2></div>
                 <div className='reg-checkbox'>
                     <FormControlLabel checked={checkboxMe} name='checkboxMe' onChange={() => handleCheckBoxes('checkboxMe')} control={<Checkbox className='checkbox' />} label="Yo" />
                     <FormControlLabel checked={checkboxOther} name='checkboxOther' onChange={() => handleCheckBoxes('checkboxOther')} control={<Checkbox className='checkbox' />} label="Otra Persona" />
                 </div>
-                
+    
                 {showSecondForm && (
                     <form>
                         <div className='reg-form'>
                             <div className='reg-form__row'>
                                 <div className='reg-form'>
-                                    <div className='title-form'> <h2>Datos del Usuario</h2></div>
+                                    <div className='title-form'><h2>Datos del Usuario</h2></div>
                                     <div className='reg-form__row'>
                                         <TextField id="names" label="Nombres" variant="outlined" className='input-auth-form' value={names} onChange={handleSetNames} sx={textInputStyles} />
-                                        <TextField id="lastnames" label="Apellidos" variant="outlined" className='input-auth-form'  value={lastnames} onChange={handleSetLastnames} sx={textInputStyles}/>
+                                        <TextField id="lastnames" label="Apellidos" variant="outlined" className='input-auth-form' value={lastnames} onChange={handleSetLastnames} sx={textInputStyles} />
                                     </div>
-                                    
                                     <div className='reg-form__row'>
-                                        <Autocomplete  
+                                        <Autocomplete
                                             disablePortal
                                             id="combo-box-demo"
                                             options={documentTypeOptions}
-                                             sx={textInputStyles}
+                                            sx={textInputStyles}
                                             renderInput={(params) => <TextField {...params} label="Tipo de Documento" />}
                                             value={documentType}
                                             onChange={handleSetDocumentType}
-                                        />                  
-                                        <TextField id="identification" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identification}  onChange={handleSetIdentification} sx={textInputStyles}/>
+                                        />
+                                        <TextField id="identification" label="Numero de Documento" variant="outlined" className='input-auth-form' value={identification} onChange={handleSetIdentification} sx={textInputStyles} />
                                     </div>
                                     <div className='reg-form__row'>
-                                        <LocalizationProvider dateAdapter={AdapterDayjs}  >
-                                            <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDay}  onChange={handleSetBirthday}  sx={textInputStyles} />
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            <DatePicker format="MM/DD/YYYY" label="Fecha de nacimiento" selected={birthDay} onChange={handleSetBirthday} sx={textInputStyles} />
                                         </LocalizationProvider>
-                                        <TextField id="phone" label="Telefono" variant="outlined" className='input-auth-form' value={phone} onChange={handleSetPhone} sx={textInputStyles}/>
+                                        <TextField id="phone" label="Telefono" variant="outlined" className='input-auth-form' value={phone} onChange={handleSetPhone} sx={textInputStyles} />
                                     </div>
-                                    
                                     <div className='reg-form__row'>
-                                        <Autocomplete 
+                                        <Autocomplete
                                             disablePortal
                                             id="combo-box-demo"
                                             margin="normal"
                                             options={genreOptions}
-                                             sx={textInputStyles}
+                                            sx={textInputStyles}
                                             renderInput={(params) => <TextField {...params} label="Sexo" />}
                                             value={genre}
                                             onChange={handleSetGenre}
-                                        />            
-                                        <Autocomplete 
+                                        />
+                                        <Autocomplete
                                             disablePortal
                                             id="combo-box-demo"
                                             margin="normal"
                                             options={schoolingOptions}
-                                             sx={textInputStyles}
+                                            sx={textInputStyles}
                                             renderInput={(params) => <TextField {...params} label="Nivel de Escolaridad" />}
                                             value={schooling}
                                             onChange={handleSetSchooling}
-                                        />       
+                                        />
                                     </div>
                                     <div className='reg-form__row'>
-                                        <TextField id="email" label="Correo Electronico" variant="outlined" className='input-auth-form' value={email} onChange={handleSetEmail} sx={textInputStyles}/>
+                                        <TextField id="email" label="Correo Electronico" variant="outlined" className='input-auth-form' value={email} onChange={handleSetEmail} sx={textInputStyles} />
                                         <FormControl sx={textInputStyles}>
                                             <InputLabel htmlFor="outlined-adornment-confirm-password">Contraseña</InputLabel>
                                             <OutlinedInput
@@ -323,17 +361,40 @@ const SignUp = () => {
                                 </div>
                             </div>
                         </div>
-                   </form>
+                    </form>
                 )}
-                
+    
                 <div className='reg-button'>
-                    <Button variant="contained" style={{background:"#357960", borderRadius: "10px"}} onClick={handleSave}>
+                    <Button variant="contained" style={{ background: "#357960", borderRadius: "10px" }} onClick={handleSave}>
                         Registrese en Cognitiv
                     </Button>
                 </div>
+
+                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                    <MuiAlert           
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity="error"
+                    >
+                        Hay campos vacíos o inválidos
+                    </MuiAlert>
+                </Snackbar>
+
+                <Snackbar open={openSnackbarDuplicated} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                    <MuiAlert           
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity="error"
+                    >
+                        Esta identification ya ha sido registrada
+                    </MuiAlert>
+                </Snackbar>
             </div>
         </div>
-  )
+    );
+     
 }
 
 export default SignUp

@@ -1,11 +1,7 @@
-.register-container{
-    background-image: url("../assets/images/global/pattern.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.memb-container{
+    background-color: #55be98;
     width: 100%;
     min-height: 100vh;
-    padding: 0;
     display: flex;
     flex-direction: column;
 
@@ -28,19 +24,31 @@
         }
     }
 
-    & .form-container{
-        border: 0;
+    & .memb-list{
         display: flex;
+        align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
-        width: 100%;
-        height: 100%;
-    }
+        padding: 10px;
 
-    @media (max-width: 1000px){
-        .register-container{
-            & .form-container{
+        & .memb-list-container {
+
+            display: flex;
+            flex-direction: row;
+        }
+    }
+    
+    @media (max-width: 1000px) {
+        & .header{
+            img{
+                width: 60%;
+            }
+        }
+
+        & .memb-list {
+            & .memb-list-container {
                 width: 100%;
+                flex-direction: column;
+                gap: 10px;
             }
         }
     }
