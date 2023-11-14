@@ -1,64 +1,63 @@
-import React, { useState } from 'react'
-import { Typography, List, ListItem, ListItemText, Modal, Button, Box, Card, CardContent } from '@mui/material';
+import React from 'react';
+import { Typography, Button, Card, CardContent, Divider } from '@mui/material';
+import MembershipModal from './MembershipModal';
+import './MembershipCard.scss';
 
-import MembershipModal from './MembershipModal'
-
-
-const MembershipList = ({ membership, showModal, closeModal}) => {
-
-
-
+const MembershipList = ({ membership, showModal, closeModal }) => {
   return (
-
-    <Card sx={{width: '100%', height: '100%'}} >
-      <CardContent>
-        <Typography variant="h5" component="div"
-          sx={{
-            fontWeight: 'bold',
-            textAlign: 'center'
-          }}
-        >
+    <Card className="membership-card">
+      <CardContent className="card-content">
+        <div className="header">
+          <Typography variant="p" component="div" className="membership-type">
             {membership.type}
-        </Typography>
-        <Typography variant="h5" component="div">
+          </Typography>
+        </div>
+
+        <Divider variant="middle" className="divider" />
+
+        <div className="price-section">
+          <Typography variant="p" component="div" className="price">
+            {'$' + membership.price + ' COP'}
+          </Typography>
+
+          <Typography variant="p" component="div" className="duration">
+            {'Por año'}
+          </Typography>
+        </div>
+
+        <Divider variant="middle" className="divider" />
+
+        <div className="description-section">
+          <Typography variant="p" component="div" className="description">
             {membership.description}
-        </Typography>
-        <Typography variant="h5" component="div"
-          sx={{
-            color: "green"
-          }}
-        >
-            {membership.price}
-        </Typography>
-          
+          </Typography>
+        </div>
+
+        <Divider variant="middle" className="divider" />
+
+        <div className='addons'>
+          {membership.addons && membership.addons.length > 0 && (
+            <ul className="addons-list">
+              {membership.addons.map((addon, index) => (
+                <li key={index}>{addon}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       </CardContent>
-
-      <Button
-        onClick={() => showModal(membership, closeModal)}
-        variant="contained"
-        color= "primary"
-        sx={{
-          border: '2px solid black', 
-          backgroundColor: 'white',  
-          color: 'black', 
-          '&:hover': { 
-            backgroundColor: 'lightgreen', 
-            color: 'black', 
-          },
-          position: 'absolute',
-          bottom: 0,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          marginBottom: '16px', 
-        }}
-      >
-        Suscribirse
-      </Button>
-                  
+                
+      <div className='subs-button'>
+        <Button
+          onClick={() => showModal(membership, closeModal)}
+          variant="contained"
+          color="primary"
+          className="subscribe-button"
+        >
+          Suscribirse
+        </Button>
+      </div>
     </Card>
-    
-  )
-}
+  );
+};
 
-
-export default MembershipList
+export default MembershipList;

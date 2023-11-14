@@ -1,14 +1,11 @@
 import "./App.scss"
-import WelcomeView from "./screens/guest/WelcomeView";
-import Experiences from "../src/screens/guest/Experiences"
-import MembershipList from "./screens/MembsershipsList";
+import WelcomeView from "./screens/guest/WelcomeView"; 
+import SuccesSignUp from "./screens/SuccesSignUp"
 
 function App() {
   return (
     <div className="app-container">
-      <MembershipList></MembershipList>
-      {/* <WelcomeView></WelcomeView> */}
-      {/* <Experiences></Experiences> */}
+      <WelcomeView></WelcomeView>
     </div> 
   );
 };
