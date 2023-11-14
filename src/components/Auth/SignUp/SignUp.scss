@@ -1,13 +1,15 @@
-.container {
+.reg-main-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    width: 80%;
     height: 100%;
     background: transparent;
     
     .reg-container{
-        width: 80%;
+        width: 90%;
+        padding: 10px;
         margin: 1%;
         display: flex;
         flex-direction: column;
@@ -15,7 +17,7 @@
         justify-content: center;
         align-items: center;
         background-color: #fdfdfd;
-        border-radius: 2%;
+        border-radius: 1%;
         box-shadow: 0px 5px 5px rgba(80, 80, 80, 0.5);
         border-top: 1px solid rgba(80, 80, 80, 0.5);
         border-bottom: 1px solid rgba(80, 80, 80, 0.5);
@@ -44,7 +46,7 @@
     
                 & .logo-img{
                     margin: 2%;
-                    width: 50%;
+                    width: 40%;
                 }
             }
 
@@ -52,7 +54,6 @@
                 gap: 10px;
                 display: flex;
                 width: 100%;
-                justify-content: center;
             }
         }
 
@@ -70,6 +71,16 @@
             justify-content: center;
             align-items: center;
             margin: 3%;
+        }
+    }
+}
+
+@media (max-width: 1000px){
+    .reg-main-container{
+        width: 95%; 
+        & .reg-container{
+            width: 100%;
+            height: auto;
         }
     }
 }

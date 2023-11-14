@@ -7,6 +7,10 @@ import RegisterView from './screens/RegisterView';
 import HomePage from './screens/HomePage';
 import PhysicalTrainings from './screens/PhysicalTrainings';
 import NonImmersive from './screens/NonImmersive';
+
+import Membserships from './screens/MembsershipsList';
+import SuccesSignUp from './screens/SuccesSignUp';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter> 
@@ -16,6 +20,9 @@ root.render(
             <Route path="home" element={<HomePage />} />
             <Route path="physicaltrainings" element={<PhysicalTrainings />} />
             <Route path="physicaltrainings/nonimmersive" element={<NonImmersive />} />
+            <Route path="signup/membership" element={<Membserships />} />
+            <Route path="successRegistration" element={<SuccesSignUp />} />
+
         </Routes>
     </BrowserRouter>
 );

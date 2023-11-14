@@ -4,41 +4,41 @@ import logo from "../../assets/images/global/logoNav.png"
 import { Link } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({showOptions}) => {
     const [menuOpen, setMenuOpen] = useState(false);
-  return (
-    <nav>
-        <Link to={"login"} smooth={true} offset={-110} duration={500} className='title'>
-            <img src={logo} alt='' className='logo'></img>
-        </Link>
-        <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul className={menuOpen ? "open" : ""}>
-            <li>
-                <Link to={"aboutUs"} smooth={true} offset={-100} duration={500}>
-                  ¿Quienes somos?
-                </Link>
-            </li>
+    return (
+      <nav>
+          <Link to={"login"} smooth={true} offset={-110} duration={500} className='title'>
+              <img src={logo} alt='' className='logo'></img>
+          </Link>
 
-            <li>
-                <Link to={"aboutUs"} smooth={true} offset={1450} duration={500}>
-                  Equipo
-                </Link>
-            </li>
+          <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
 
-            <li>
-                <NavLink to="/experiences">Experiencias significativas</NavLink>
-            </li>
-            
-            <li>
-                <NavLink to="/services">Contacto</NavLink>
-            </li>
-        </ul>
-    </nav>
-  )
+          {showOptions ? 
+            <ul className={menuOpen ? "open" : ""}>
+                <li>
+                    <Link to={"aboutUs"} smooth={true} offset={-100} duration={500}>
+                        ¿Quienes somos?
+                    </Link>
+                </li>
+
+                <li>
+                    <Link to={"team"} smooth={true} offset={-30} duration={500}>
+                        Equipo
+                    </Link>
+                </li>
+
+                <li>
+                    <NavLink to="/experiences">Experiencias significativas</NavLink>
+                </li>
+            </ul> : <></>
+          }
+      </nav>
+    )
 }
 
 export default NavBar

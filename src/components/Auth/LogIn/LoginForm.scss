@@ -123,4 +123,17 @@
         background-color: #3bad3f; 
         color: white;
     }
+
+
+    @media (max-width: 1000px){
+        .button-container{
+            width: 90%;
+        }
+
+        & .header{    
+            & p{
+                font-size: 4em;
+            }
+        }
+    }
 }

@@ -4,19 +4,15 @@ const { BASE_API_URL, API_ROUTER } = ENV;
 
 export class Suscription {
 
-    async newSuscription(membershipId, membershipDuration, imageFile) {
+    async newSuscription(userId, membershipId, membershipDuration, imageFile) {
       try {
-        console.log(membershipId);
-        console.log(imageFile);
-        console.log(membershipDuration);
-      
         const formData = new FormData();
         formData.append('membership_id', membershipId);
-        formData.append('user_id', '650d43dbf9a6b95f725d0a43');
+        formData.append('user_id', userId);
         formData.append('duration', membershipDuration);
-        formData.append('voucher', imageFile);
-      
-        console.log(formData);
+        if(imageFile !== null){
+          formData.append('voucher', imageFile);
+        }
       
         const response = await axios.post(`${BASE_API_URL}${API_ROUTER.SUSCRIPTIONS}`, formData, {
           headers: {
@@ -34,5 +30,22 @@ export class Suscription {
         console.error('Error en la solicitud Axios:', error);
         throw error;
       }
+    }
+
+    getSubById = async (subId) => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.GETSUB}${subId}`, {
+        method: "GET",
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          const sub = await response.json();
+          return sub
+        }
+      } catch (error) {
+        throw error;
       }
+    }
 }

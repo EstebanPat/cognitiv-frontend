@@ -11,7 +11,7 @@ const WelcomeView = () => {
   return (
     <div className='main'>
       <div className='nav-container'>
-        <NavBar/>
+        <NavBar showOptions={true}/>
       </div>
 
       <div className='log-container' id='login'>

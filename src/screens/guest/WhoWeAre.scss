@@ -1,6 +1,6 @@
 .about-us{
     width: 100%;
-    height: 1500px;
+    height: auto;
     margin-bottom: 10px;
 
     & .about-row{
@@ -18,6 +18,7 @@
             color: #FEFEFA;
 
             & p:first-of-type {
+                display: flex;
                 font-size: 3rem;
                 margin: 3rem;
                 margin-top: 7%;
@@ -48,14 +49,12 @@
 
         & .about-image{
             width: 35%;
-            height: 90%;
             background-color: #FEFEFA;  
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 0 150px 0 100px;
-            margin-top: 1.5%;
-            margin-left: 1.5%;
+            margin: 1.5%;
 
             & img{
                 width: 90%;
@@ -71,7 +70,7 @@
         flex-direction: row;
         justify-content: center;
 
-        & .book-one{
+        & .book-one,.book-two{
             width: 50%;
             height: 100%;
 
@@ -85,15 +84,16 @@
                     & img{
                         border-radius: 10px;
                         border: 6px solid #357960;
-                        width: 100%;
+                        width: 50%;
                     }
                 }
             }
 
             .book-one-text{
                 width: 100%;
-                height: 15%;
+                height: auto;
                 display: flex;
+                margin: 2%;
                 justify-content: center;
                 flex-direction: column;
                
@@ -132,14 +132,14 @@
                     & img{
                         border-radius: 10px;
                         border: 6px solid #357960;
-                        width: 100%;
+                        width: 50%;
                     }
                 }
             }
 
             .book-two-text{
-                width: 100%;
-                height: 15%;
+                height: auto;
+                margin: 2%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -170,7 +170,10 @@
 
     & .info{
         width: 100%;
-        height: 22%;
+        height: auto;
+        margin-top: 4%;
+        padding-top: 2%;
+        padding-bottom: 2%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -179,6 +182,7 @@
         color: #FEFEFA;
 
         & p:first-of-type {
+            display: flex;
             text-align: center;
             font-size: 1.2rem;
             font-weight: bold;
@@ -203,4 +207,61 @@
         }
     }
 
+    @media (max-width: 1000px){
+        .about-row{
+            flex-direction: column;
+
+            & .about-content{
+                width: 100%;
+
+                & p:first-of-type {
+                    font-size: 2rem;
+                    display: flex;
+                    margin: 2rem;
+                    margin-top: 1%;
+                }
+                
+                & p:nth-child(2) {
+                    font-size: 1.2rem;
+                    margin-left: 2rem;
+                    margin-bottom: 4% ;
+                    text-align: justify;
+                    
+                }
+    
+                & p:nth-child(3) {
+                    font-size: 1.2rem;
+                    margin-left: 2rem;
+                    margin-top: 1%;
+                    margin-bottom: 4%;
+                }
+    
+                & p:nth-child(4) {
+                    font-size: 1.2rem;
+                    margin-left: 2rem;
+                    margin-top: 1%;
+                }
+            }
+
+            & .about-image{
+                width: 96%;
+                height: 150px;
+                align-items: center;
+                justify-content: center;
+                margin-top: 5%;
+
+                & img{
+                    width: 70%;
+                }
+            }
+        }
+
+        .about-books{
+            flex-direction: column;
+
+            .book-one,.book-two{
+                width: 100%;
+            }
+        }
+    }
 }
