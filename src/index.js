@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RegisterView from './screens/RegisterView';
+import ActivateView from './screens/ActivateView';
 import HomePage from './screens/HomePage';
 import PhysicalTrainings from './screens/PhysicalTrainings';
 import NonImmersive from './screens/NonImmersive';
@@ -18,10 +19,11 @@ root.render(
             <Route index element={<App />} />
             <Route path="signup" element={<RegisterView />} />
             <Route path="home" element={<HomePage />} />
-            <Route path="physicaltrainings" element={<PhysicalTrainings />} />
-            <Route path="physicaltrainings/nonimmersive" element={<NonImmersive />} />
+            <Route path="home/physicaltrainings" element={<PhysicalTrainings />} />
+            <Route path="home/physicaltrainings/nonimmersive" element={<NonImmersive />} />
             <Route path="signup/membership" element={<Membserships />} />
             <Route path="successRegistration" element={<SuccesSignUp />} />
+            <Route path="activateAccount/*" element={<ActivateView />} />
 
         </Routes>
     </BrowserRouter>

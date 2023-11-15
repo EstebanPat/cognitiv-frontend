@@ -63,5 +63,26 @@ export class Auth{
         throw error;
       }
     }
+  
+    activateAccount = async (token) => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.ACTIVATE}`,{
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
 
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          const msessage = await response.json();
+          return msessage
+        }
+      } catch (error) {
+        throw error;
+      }
+
+    }
 }

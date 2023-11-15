@@ -4,9 +4,11 @@ import userIcon from "../../../assets/icons/LoginIcons/person.png"
 import passIcon from "../../../assets/icons/LoginIcons/password.png"
 import { Link } from "react-router-dom";
 import "./LoginForm.scss"
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const auth = new Auth();
+  const navigate = useNavigate()
   const [userDocument, setUserDocument] = useState("");
   const [userPass, setUserPass] = useState("");
   const [errorDoc, setErrorDoc] = useState("");
@@ -51,6 +53,7 @@ const LoginForm = () => {
         
         try {
           const response = await auth.login(data);
+          navigate('home')
         } catch (error) {
           if (error.message !== "Unexpected end of input") {
             setBackError(error);
