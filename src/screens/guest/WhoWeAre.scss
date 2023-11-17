@@ -53,7 +53,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 0 150px 0 100px;
+            border-radius: 0 50px 0 50px;
             margin: 1.5%;
 
             & img{
@@ -261,6 +261,31 @@
 
             .book-one,.book-two{
                 width: 100%;
+            }
+        }
+
+        .info{
+            & p:first-of-type {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                font-size: 1rem;
+                font-weight: lighter;
+            }
+    
+            & p:nth-child(2){
+                margin-top: 1.5rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                font-size: 1rem;
+                & li{
+                    margin-top: 0.5rem;
+                }
+            }
+    
+            & p:nth-child(3){
+                margin-left: 1rem;
+                margin-right: 1rem;
+                margin-top: 1.5rem;
             }
         }
     }

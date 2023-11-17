@@ -47,6 +47,10 @@
         }
     }
 
+    & .footer{
+        margin-top: 2%;
+    }
+
     @media (max-width: 1000px) {
         & .log-container{
             height: 800px;

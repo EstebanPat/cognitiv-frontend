@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
-import { Auth } from '../api/index'
+import { Auth } from '../../api/index'
 import { useLocation } from 'react-router-dom'
+import "./ActivateView.scss"
+
 const ActivateView = () => {
     const auth = new Auth()
     const location = useLocation()

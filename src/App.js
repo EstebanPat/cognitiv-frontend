@@ -1,8 +1,5 @@
 import "./App.scss"
-
 import WelcomeView from "./screens/guest/WelcomeView"; 
-import SuccesSignUp from "./screens/SuccesSignUp"
-
 
 function App() {
   return (

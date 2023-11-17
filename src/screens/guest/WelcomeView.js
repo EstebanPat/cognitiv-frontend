@@ -4,6 +4,7 @@ import LoginForm from '../../components/Auth/LogIn/LoginForm'
 import image1 from "../../assets/images/home/welcome.png"
 import NavBar from '../../components/Surfaces/NavBar'
 import WhoWeAre from "./WhoWeAre";
+import Footer from "../../components/Surfaces/Footer";
 import Team from './Team'
 
 
@@ -29,6 +30,10 @@ const WelcomeView = () => {
 
       <div className='team-container' id='team'>
         <Team></Team>
+      </div>
+
+      <div className='footer'>
+        <Footer></Footer>
       </div>
       
     </div>
