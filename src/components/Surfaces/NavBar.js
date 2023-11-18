@@ -27,7 +27,7 @@ const NavBar = ({showOptions}) => {
                 </li>
 
                 <li>
-                    <Link to={"team"} smooth={true} offset={-30} duration={500}>
+                    <Link to={"team"} smooth={true} offset={-60} duration={500}>
                         Equipo
                     </Link>
                 </li>

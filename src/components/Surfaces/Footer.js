@@ -4,6 +4,7 @@ import logo from "../../assets/images/global/logoNav.png"
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -25,8 +26,10 @@ const Footer = () => {
                 </ul>
             </div>
 
-            <div className='privacy'>
-                <a href='#'>Política de términos y privacidad</a>
+            <div className='privacy-link'>
+                <Link to="/privacypolicy" target='_blank'>
+                  Política de términos y privacidad
+                </Link>
             </div>
           </div>
 
