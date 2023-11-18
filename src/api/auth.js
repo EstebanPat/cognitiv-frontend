@@ -23,7 +23,7 @@ export class Auth{
         } catch (error) {
           throw error;
         }
-      };
+    };
 
     //Autenticacion 
     login = async (data) => {
@@ -43,6 +43,29 @@ export class Auth{
           localStorage.setItem(ENV.JWT.ACCESS, access)
         }
       } catch (error) {
+        throw error;
+      }
+    };
+
+    update = async (data, token) => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.UPDATE}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        
+        body: JSON.stringify(data),
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          return true
+        }
+      } catch (error) {
+        console.log(error)
         throw error;
       }
     };

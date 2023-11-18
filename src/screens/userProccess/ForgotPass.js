@@ -76,7 +76,7 @@ const ForgotPass = () => {
                     </div>
                 </form>
 
-                {showModal && <ForgotPassModal closeModal={() => setShowModal(false)} />}
+                {showModal && <ForgotPassModal closeModal={() => setShowModal(false)} passwordChanged={false} />}
             </div>
 
             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>

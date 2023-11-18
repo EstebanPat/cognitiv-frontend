@@ -3,7 +3,7 @@ import { Modal, Typography, Button, Divider, Box } from '@mui/material';
 import './ForgotPassModal.scss';
 import { useNavigate } from 'react-router-dom'; 
 
-const ForgotPassModal = ({ closeModal }) => {
+const ForgotPassModal = ({ closeModal, passwordChanged }) => {
     const navigate = useNavigate(); 
     const [showModal, setShowModal] = useState(true);
 
@@ -12,7 +12,7 @@ const ForgotPassModal = ({ closeModal }) => {
         navigate('/'); 
     };
 
-    useEffect(() => {
+    /* useEffect(() => {
         let timer;
         if (showModal) {
             timer = setTimeout(() => {
@@ -23,7 +23,7 @@ const ForgotPassModal = ({ closeModal }) => {
         return () => {
             clearTimeout(timer);
         };
-    }, [showModal, handleCloseModal]);
+    }, [showModal, handleCloseModal]); */
 
     return (
         <Modal open={showModal} onClose={handleCloseModal}>
@@ -32,13 +32,24 @@ const ForgotPassModal = ({ closeModal }) => {
                     Restablecimiento de contraseña
                 </Typography>
 
-                <Typography variant="body1" className="message">
-                    ¡Correo enviado con éxito!
-                </Typography>
+                { passwordChanged === false ? 
+                    <>
+                        <Typography variant="body1" className="message">
+                        ¡Correo enviado con éxito!
+                        </Typography>
 
-                <Typography variant="body1" className="message">
-                    Revisa tu correo electrónico para continuar con el proceso de restablecimiento
-                </Typography>
+                        <Typography variant="body1" className="message">
+                            Revisa tu correo electrónico para continuar con el proceso de restablecimiento
+                        </Typography>
+                    </>
+                    :
+                    <>
+                        <Typography variant="body1" className="message">
+                            Su contraseña ha sido restablecida
+                        </Typography>
+                    </>
+                }
+                
 
                 <Button onClick={handleCloseModal} variant="contained" color="error" className="close-button">
                     Cerrar

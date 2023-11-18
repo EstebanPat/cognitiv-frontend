@@ -9,6 +9,7 @@ import Team from './Team'
 
 
 const WelcomeView = () => {
+  
   return (
     <div className='main'>
       <div className='nav-container'>

@@ -12,6 +12,7 @@ import NonImmersive from './screens/NonImmersive';
 import Membserships from './screens/MembsershipsList';
 import SuccesSignUp from './screens/userProccess/SuccesSignUp';
 import ForgotPass from './screens/userProccess/ForgotPass';
+import PassRecovering from './screens/userProccess/PassRecovering';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,7 @@ root.render(
             <Route path="successRegistration" element={<SuccesSignUp />} />
             <Route path="activateAccount/*" element={<ActivateView />} />
             <Route path="forgotpass/*" element={<ForgotPass />} />
+            <Route path="changepassword/*" element={<PassRecovering />} />
         </Routes>
     </BrowserRouter>
 );
