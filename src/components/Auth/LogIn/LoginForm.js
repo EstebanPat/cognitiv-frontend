@@ -103,7 +103,7 @@ const LoginForm = () => {
       </form>
 
       <div className='forgot-pass'>
-        <p>¿Olvidaste la contraseña? <a href='#'>¡Da click aquí!</a></p>
+        <p>¿Olvidaste la contraseña? <Link to="/forgotpass">¡Da click aquí!</Link> </p>
       </div>
 
       <div className='button-container'>

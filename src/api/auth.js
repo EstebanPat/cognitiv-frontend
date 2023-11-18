@@ -85,4 +85,23 @@ export class Auth{
       }
 
     }
+
+    forgotpass = async (identification) => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.FORGOT}/${identification}`,{
+        method: "POST",
+      })
+
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          const message = await response.json();
+          return message
+        }
+      } catch (error) {
+        throw error;
+      }
+
+    }
 }

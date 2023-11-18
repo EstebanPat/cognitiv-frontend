@@ -14,7 +14,8 @@ export const ENV = {
         MEMBERSHIPS: "memberships/",
         SUSCRIPTIONS: "suscriptions/new-suscription",
         GETSUB: "suscriptions/",
-        ACTIVATE: "users/activate"
+        ACTIVATE: "users/activate",
+        FORGOT: "users/forgotpass"
     },
     JWT: {
         ACCESS: "access",
