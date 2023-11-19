@@ -127,4 +127,26 @@ export class Auth{
       }
 
     }
+
+    getAccessToken = () => {
+      return localStorage.getItem("access");
+    };
+
+    getMe = async () => {
+      const accessToken = this.getAccessToken();
+
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.GETME}`,{
+        method: "GET",
+        headers:{
+          Authorization: `Bearer ${accessToken}`
+        },
+      })
+
+      try {
+        if(response.status !== 200) throw response
+        return await response.json()
+      } catch (error) {
+        throw error
+      }
+    }; 
 }
