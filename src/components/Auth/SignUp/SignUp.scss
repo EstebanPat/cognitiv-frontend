@@ -54,6 +54,33 @@
                 gap: 10px;
                 display: flex;
                 width: 100%;
+            }  
+        }
+
+        .terms-checkbox{
+            margin-top: 2%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & .checkbox{
+                color: #357960;
+            }
+
+            & p{
+                background: transparent;
+                color: #797979;
+                & a{
+                    background: transparent;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    color: #399c45;
+                }
+    
+                & a:hover{
+                    background-color: #32b46647;
+                }
             }
         }
 
