@@ -18,6 +18,7 @@ const LoginForm = () => {
   function errorHandle(){
     if(userDocument.length === 0){
       setErrorDoc("El campo de documento no puede estar vacío")
+      setBackError("");
     }else{
       setErrorDoc("")
       setBackError("")
@@ -25,6 +26,7 @@ const LoginForm = () => {
 
     if(userPass.length === 0){
       setErrorPass("El campo de contraseña no puede estar vacío")
+      setBackError("");
     }else{
       setBackError("")
       setErrorPass("")
@@ -101,7 +103,7 @@ const LoginForm = () => {
       </form>
 
       <div className='forgot-pass'>
-        <p>¿Olvidaste la contraseña? <a href='#'>¡Da click aquí!</a></p>
+        <p>¿Olvidaste la contraseña? <Link to="/forgotpass">¡Da click aquí!</Link> </p>
       </div>
 
       <div className='button-container'>

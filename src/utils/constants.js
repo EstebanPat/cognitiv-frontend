@@ -13,8 +13,11 @@ export const ENV = {
         USERS: "users/",
         MEMBERSHIPS: "memberships/",
         SUSCRIPTIONS: "suscriptions/new-suscription",
+        UPDATE: "users/update",
+        ACTIVATE: "users/activate",
+        FORGOT: "users/forgotpass",
+
         GETSUB: "suscriptions/",
-        ACTIVATE: "users/activate"
     },
     JWT: {
         ACCESS: "access",
