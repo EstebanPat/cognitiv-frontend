@@ -47,12 +47,15 @@ export class Auth{
       }
     };
 
-    update = async (data) => {
-      const accessToken = this.getAccessToken();
+    update = async (data, token) => {
+      if(!token){
+        token = this.getAccessToken();
+      }
+      
       const response = await fetch(`${BASE_API_URL}${API_ROUTER.UPDATE}`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         

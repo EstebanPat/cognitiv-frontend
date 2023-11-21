@@ -19,7 +19,9 @@ import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlin
 import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { useNavigate } from 'react-router-dom';
+import logo from '../../../assets/images/global/logoNav.png'
+
+import { Link, useNavigate } from 'react-router-dom';
 import { Toolbar, Typography } from '@mui/material';
 
 const drawerWidth = 240;
@@ -53,6 +55,7 @@ const AppBar = styled(MuiAppBar, {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    background: '#55be98',
     ...(open && {
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
@@ -119,9 +122,9 @@ export default function SideNav() {
             >
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-                Mini variant drawer
-            </Typography>
+            <Link to={"/"} smooth={true} offset={-110} duration={500} className='title'>
+              <img src={logo} alt='' className='logo' width={'30%'}></img>
+            </Link> 
             </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

@@ -34,8 +34,7 @@ const UserViewer = ({user, closeModal, disabled}) => {
     const handleSetPassword = (event) => {
         setPassword(event.target.value)
     }
-
-    /* Functions for the Password */
+    
     const handleClickShowPassword = () =>{
         setShowPassword(!showPassword)
     }
@@ -216,6 +215,17 @@ const UserViewer = ({user, closeModal, disabled}) => {
                             <TextField 
                                 sx={textInputStyles} 
                                 id="namesAttendant" 
+                                label={"Id"} 
+                                variant="outlined" 
+                                className='input-auth-form' 
+                                value={userDb ? userDb._id : ""}
+                                disabled={true}
+                            />
+                        </div>
+                        <div className='reg-form__row'>
+                            <TextField 
+                                sx={textInputStyles} 
+                                id="namesAttendant" 
                                 label={"Nombres"} 
                                 variant="outlined" 
                                 className='input-auth-form' 
@@ -318,28 +328,34 @@ const UserViewer = ({user, closeModal, disabled}) => {
                                 onChange={(event, newValue) => handleUserChange('selectedGenre', newValue)}
                             />
 
-                            <FormControl sx={textInputStyles}>
-                                <InputLabel htmlFor="outlined-adornment-confirm-password">Contraseña</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-password"
-                                    label="Contraseña"
-                                    type={showPassword ? 'text' : 'password'}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                    value={password}
-                                    onChange={handleSetPassword}
-                                />
-                            </FormControl>
+                            {disabled === false ? 
+                                <FormControl sx={textInputStyles}>
+                                    <InputLabel htmlFor="outlined-adornment-confirm-password">Contraseña</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-password"
+                                        label="Contraseña"
+                                        type={showPassword ? 'text' : 'password'}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        value={password}
+                                        onChange={handleSetPassword}
+                                    />
+                                </FormControl>
+
+                                :
+
+                                <></>
+                            }
                         </div>
 
                         <div className='reg-form__row'>

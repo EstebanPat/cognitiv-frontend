@@ -93,6 +93,7 @@ export default function StickyHeadTable() {
           if(response){
             Swal.fire("Eliminado", "El usuario ha sido eliminado", "success")
           }
+          getUsers()
         } catch (error) {
           console.log(error)
         }

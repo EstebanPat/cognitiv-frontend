@@ -11,8 +11,6 @@ export const ENV = {
         LOGIN: "users/login",
         REGISTER: "users/signup",
         USERS: "users/",
-        MEMBERSHIPS: "memberships/",
-        SUSCRIPTIONS: "suscriptions/new-suscription",
         UPDATE: "users/update",
         ACTIVATE: "users/activate",
         FORGOT: "users/forgotpass",
@@ -20,7 +18,12 @@ export const ENV = {
         DELETE: "users/delete",
         UPDATEADMIN: "users/admin/update",
 
+        MEMBERSHIPS: "memberships/",
+        SUSCRIPTIONS: "suscriptions/new-suscription",
+
+
         GETSUB: "suscriptions/",
+        DELETESUB: "suscriptions/delete"
     },
     JWT: {
         ACCESS: "access",
