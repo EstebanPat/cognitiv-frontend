@@ -1,0 +1,71 @@
+.privacy-main{
+    min-height: 100vh;
+
+    background-image: url("../../assets/images/global/backgroundWaves.svg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+
+    & .header{
+        width: 100%;
+        height: 110px;
+        display: flex;
+        z-index: 2;
+        justify-content: center;
+        align-items: center;
+        background-color: #FEFEFA;
+        position: relative;
+
+        & a{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img{
+            width: 40%;
+        }
+    }
+
+    .privacy {
+        padding: 3%;
+        height: auto;
+        position: relative;
+        color: #fff;
+        background-color: rgba(53, 121, 96, 0.73);
+        z-index: 2;
+        line-height: 1.8; 
+        padding-bottom: 5%; 
+    }
+      
+    .privacy h1,
+    .privacy h2,
+    .privacy h3,
+    .privacy h4,
+    .privacy p,
+    .privacy ul,
+    .privacy li,
+    .privacy a {
+        color: #ffffff; /* Cambio de color a verde */
+    }
+    
+    .privacy a {
+        text-decoration: none;
+        color: #6fffca;
+    }
+    
+    .privacy ul {
+    padding-left: 20px; /* Indentación hacia la derecha */
+    }
+}
+
+.privacy-main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+     /* Color negro con opacidad */
+    z-index: 1; /* Ajusta el índice z para que esté encima del fondo */
+}

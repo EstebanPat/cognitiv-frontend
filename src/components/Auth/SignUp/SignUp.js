@@ -8,7 +8,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import "./SignUp.scss";
 import { Auth } from '../../../api/index';
 import logo from '../../../assets/images/global/logoSignUp.png'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const textInputStyles = {
     width:"100%",
@@ -22,6 +22,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [openSnackbarDuplicated, setOpenSnackbarDuplicated] = useState(false);
+    const [openSnackbarTerms, setOpenSnackbarTerms] = useState(false);
     /* Information of the Attendant (if the user needs one) */
     const [namesAttendant, setNamesAttendant] = useState('');
     const [lastnamesAttendant, setLastnamesAttendant] = useState('');
@@ -29,6 +30,9 @@ const SignUp = () => {
     const [identificationAttendant, setIdentificationAttendant] = useState('');
     const [phoneAttendant, setPhoneAttendant] = useState('');
     const [emailAttendant, setEmailAttendant] = useState('');
+
+    //Terms
+    const [acceptTerms, setAcceptTerms] = useState(false);
 
     const [names, setNames] = useState('');
     const [lastnames, setLastnames] = useState('');
@@ -180,6 +184,10 @@ const SignUp = () => {
         setOpenSnackbar(false);
     };
 
+    const handleAcceptTerms = (event) => {
+        setAcceptTerms(event.target.checked);
+    }
+
     const handleSave = async () => {
         // Validar campos antes de enviar el formulario
         if (
@@ -196,6 +204,11 @@ const SignUp = () => {
             (showSecondForm && (!namesAttendant || !lastnamesAttendant || !birthDayAttendant || !identificationAttendant || !phoneAttendant || !emailAttendant))
         ) {
             setOpenSnackbar(true);
+            return;
+        }
+
+        if(acceptTerms === false){
+            setOpenSnackbarTerms(true);
             return;
         }
 
@@ -361,6 +374,21 @@ const SignUp = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className='reg-form__row'>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={acceptTerms}
+                                        onChange={handleAcceptTerms}
+                                        name="acceptTerms"
+                                        color="primary"
+                                        className='checkbox'
+                                    />
+                                }
+                                className="terms-checkbox"
+                                label={<p>Acepto los <Link to="/privacypolicy" target='_blank'>Terminos y condiciones de Cognitiv</Link> </p>}
+                            />
+                        </div>
                     </form>
                 )}
     
@@ -389,6 +417,17 @@ const SignUp = () => {
                         severity="error"
                     >
                         Esta identification ya ha sido registrada
+                    </MuiAlert>
+                </Snackbar>
+
+                <Snackbar open={openSnackbarTerms} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                    <MuiAlert           
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity="error"
+                    >
+                        Debe aceptar los términos y condiciones
                     </MuiAlert>
                 </Snackbar>
             </div>

@@ -6,7 +6,6 @@ const ActivateView = () => {
     const auth = new Auth();
     const routines = new Routines();
     const location = useLocation()
-
     const searchToken = new URLSearchParams(location.search)
     const token = searchToken.get('token')
     useEffect(() => {

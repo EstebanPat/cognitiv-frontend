@@ -85,13 +85,13 @@
             color: #797979;
             & a{
                 background: transparent;
-                border-radius: 10px;
+                border-radius: 5px;
                 text-decoration: none;
-                color: #13511a;
+                color: #399c45;
             }
 
             & a:hover{
-                background-color: #83978b47;
+                background-color: #32b46647;
             }
         }
     }
@@ -120,7 +120,7 @@
       
     .button:hover {
         cursor: pointer;
-        background-color: #3bad3f; 
+        background-color: #58a987; 
         color: white;
     }
 

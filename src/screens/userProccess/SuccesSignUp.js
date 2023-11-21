@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import logo from "../assets/images/global/logoNav.png"
+import logo from "../../assets/images/global/logoNav.png"
 import "./SuccesSignUp.scss"
 
 const SuccesSignUp = () => {
