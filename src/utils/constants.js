@@ -17,6 +17,8 @@ export const ENV = {
         ACTIVATE: "users/activate",
         FORGOT: "users/forgotpass",
         GETME: "users/auth/getme",
+        DELETE: "users/delete",
+        UPDATEADMIN: "users/admin/update",
 
         GETSUB: "suscriptions/",
     },

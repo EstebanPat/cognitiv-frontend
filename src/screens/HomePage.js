@@ -1,8 +1,10 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import NavBar from '../components/Surfaces/NavBar'
 import "./HomePage.scss"
+
+import { Auth } from '../api/auth';
 
 const cardStyles = {
   card: {
@@ -24,8 +26,14 @@ const cardStyles = {
 };
 
 const HomePage = () => {
-
+  const auth = new Auth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(auth.getAccessToken() === null){
+      navigate("/");
+    }
+  }, [])
 
   const handleCardClick = (text) => {
     if(text === "Entrenamiento Fisico"){

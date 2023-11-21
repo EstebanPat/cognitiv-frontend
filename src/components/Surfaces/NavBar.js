@@ -3,7 +3,7 @@ import "./NavBar.css"
 import logo from "../../assets/images/global/logoNav.png"
 
 import { Link } from 'react-scroll';
-import { NavLink , Link as RouterLink } from 'react-router-dom';
+import { useNavigate , NavLink , Link as RouterLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -12,12 +12,18 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import { Auth } from '../../api';
-
+ 
 const NavBar = () => {
     const auth = new Auth();
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [user, setUser] = useState(null)
+
+    const logOut = () => {
+		localStorage.removeItem("access");
+		navigate("/");
+	}
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -96,13 +102,15 @@ const NavBar = () => {
                             color="success"
                             className='icon-container'
                         >
-                            <p style={{fontSize:'1.2rem', fontWeight:'bold', marginRight:'5px'}}>{user.names}</p><AccountCircle/>
+                            <p style={{fontSize:'1.2rem', fontWeight:'bold', marginRight:'5px'}}>
+                                {user && (user.names)}
+                            </p><AccountCircle/>
                         </IconButton>
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}
                             anchorOrigin={{
-                            vertical: 'top',
+                            vertical: 'bottom',
                             horizontal: 'right',
                             }}
                             keepMounted
@@ -110,12 +118,13 @@ const NavBar = () => {
                             vertical: 'top',
                             horizontal: 'right',
                             }}
-                            sx={{position:'absolute'}}
+                            sx={{position:'absolute', color:"#357960"}}
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={handleClose}>Perfil</MenuItem>
+                            {user && (user.rol === "admin") && (<MenuItem onClick={() => {navigate("/dashboard/admin/users")}}>Dashboard</MenuItem>)}
+                            <MenuItem onClick={logOut}>Cerrar sesión</MenuItem>                
                         </Menu>
                     </div>
                 </>

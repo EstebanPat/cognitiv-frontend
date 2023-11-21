@@ -9,11 +9,14 @@ import HomePage from './screens/HomePage';
 import PhysicalTrainings from './screens/PhysicalTrainings';
 import NonImmersive from './screens/NonImmersive';
 
-import Membserships from './screens/MembsershipsList';
+import Membserships from './screens/MembershipList';
 import SuccesSignUp from './screens/userProccess/SuccesSignUp';
 import ForgotPass from './screens/userProccess/ForgotPass';
 import PassRecovering from './screens/userProccess/PassRecovering';
 import PrivacyAndPolicy from './screens/guest/PrivacyAndPolicy';
+import Dashboard from './screens/Admin/Dashboard';
+
+import { MembershipManagement, SubscriptionManagement, UserManagement } from './components/Admin/index'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -30,6 +33,11 @@ root.render(
             <Route path="forgotpass/*" element={<ForgotPass />} />
             <Route path="changepassword/*" element={<PassRecovering />} />
             <Route path="privacypolicy/" element={<PrivacyAndPolicy />} />
+            <Route path="dashboard/admin" element={<Dashboard />}>
+                <Route path="memberships" element={<MembershipManagement />} />
+                <Route path="subscriptions" element={<SubscriptionManagement />} />
+                <Route path="users" element={<UserManagement />} />
+            </Route>
         </Routes>
     </BrowserRouter>
 );

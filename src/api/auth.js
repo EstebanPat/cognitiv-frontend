@@ -47,11 +47,36 @@ export class Auth{
       }
     };
 
-    update = async (data, token) => {
+    update = async (data) => {
+      const accessToken = this.getAccessToken();
       const response = await fetch(`${BASE_API_URL}${API_ROUTER.UPDATE}`, {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        
+        body: JSON.stringify(data),
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          return true
+        }
+      } catch (error) {
+        console.log(error)
+        throw error;
+      }
+    };
+
+    updateAdmin = async (data, id) => {
+      const accessToken = this.getAccessToken();
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.UPDATEADMIN}/${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         
@@ -81,6 +106,23 @@ export class Auth{
         }else{
           const user = await response.json();
           return user
+        }
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    getUsers = async () => {
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.USERS}`, {
+        method: "GET",
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          const users = await response.json();
+          return users
         }
       } catch (error) {
         throw error;
@@ -137,6 +179,24 @@ export class Auth{
 
       const response = await fetch(`${BASE_API_URL}${API_ROUTER.GETME}`,{
         method: "GET",
+        headers:{
+          Authorization: `Bearer ${accessToken}`
+        },
+      })
+
+      try {
+        if(response.status !== 200) throw response
+        return await response.json()
+      } catch (error) {
+        throw error
+      }
+    }; 
+
+    removeUser = async (id) => {
+      const accessToken = this.getAccessToken();
+
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.DELETE}/${id}`,{
+        method: "DELETE",
         headers:{
           Authorization: `Bearer ${accessToken}`
         },
