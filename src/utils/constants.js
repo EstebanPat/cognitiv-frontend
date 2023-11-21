@@ -16,8 +16,9 @@ export const ENV = {
         UPDATE: "users/update",
         ACTIVATE: "users/activate",
         FORGOT: "users/forgotpass",
-
         GETSUB: "suscriptions/",
+        ACTIVATE: "users/activate",
+        CREATEROUTINES: "routines/new-routine"
     },
     JWT: {
         ACCESS: "access",
