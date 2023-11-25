@@ -18,7 +18,9 @@ export const ENV = {
         FORGOT: "users/forgotpass",
         GETSUB: "suscriptions/",
         ACTIVATE: "users/activate",
-        CREATEROUTINES: "routines/new-routine"
+        CREATEROUTINES: "routines/new-routine",
+        GETLIST: "routines/byId",
+        GETROUTINE: "routine/"
     },
     JWT: {
         ACCESS: "access",
