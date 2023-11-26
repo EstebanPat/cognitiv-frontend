@@ -3,7 +3,7 @@ import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import "./Carousel.scss"
 
-const MAX_VISIBILITY = 3;
+const MAX_VISIBILITY = 2;
 
 const Carousel = ({children}) => {
   const [active, setActive] = useState(1);

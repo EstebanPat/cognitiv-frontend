@@ -1,11 +1,11 @@
 .team-container{
-    padding-top: 2%;
-    width: 100%;
     height: auto;
     background-color: #FEFEFA;
     display: flex;
     flex-direction: row;
-    padding-bottom: 1%;
+
+    padding-left: 1%;
+    
 
     & .people{
         width: 60%;
@@ -18,7 +18,10 @@
     }
 
     & .team-content{
+        padding-left: 25px;
+        padding-right: 25px;
         height: 100%;
+        margin: 0;
         width: 40%;
         display: flex;
         flex-direction: column;
@@ -26,73 +29,61 @@
         
         & p:first-of-type{
             position: relative;
-            font-size: 3rem;
+            font-size: 2rem;
         }
 
         & p:nth-child(2){
             margin-top: 2%;
-            margin-right: 2.5rem;
             position: relative;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-align: justify;
         }
 
         & p:nth-child(3){
             margin-top: 2%;
-            margin-right: 2.5rem;
             position: relative;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-align: justify;
         }
 
         & p:nth-child(4){
             margin-top: 2%;
-            margin-right: 2.5rem;
             position: relative;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-align: justify;
         }
     }
 
     @media (max-width: 1000px) {
-        .team-container{
+        .team-container {
             flex-direction: column;
-            
-            & .people{
-                width: 100%;
-                height: auto;
-                flex-direction: column;
-            }
-
-            & .team-content{
-                margin-top: 4%;
-                width: 100%;
-                align-items: center;
-        
-                & p:nth-child(2){
-                    margin-top: 2%;
-                    margin: 1rem;
-                    position: relative;
-                    font-size: 1.1rem;
-                    text-align: justify;
-                }
-        
-                & p:nth-child(3){
-                    margin-top: 2%;
-                    margin: 1rem;
-                    position: relative;
-                    font-size: 1.1rem;
-                    text-align: justify;
-                }
-        
-                & p:nth-child(4){
-                    margin-top: 2%;
-                    margin: 1rem;
-                    position: relative;
-                    font-size: 1.1rem;
-                    text-align: justify;
-                }
-            }
+            align-items: center;
+            text-align: center;
+        }
+    
+        .people {
+            order: 2;
+            width: 90%;
+            height: auto;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+    
+        .team-content {
+            order: 1;
+            margin-top: 4%;
+            width: 90%;
+            align-items: center;
+            text-align: justify;
+            margin-bottom: 10%;
+        }
+    
+        .team-content p {
+            margin-top: 2%;
+            margin: 0 1rem; 
+            font-size: 1.1rem;
+            text-align: justify;
         }
     }
 }
