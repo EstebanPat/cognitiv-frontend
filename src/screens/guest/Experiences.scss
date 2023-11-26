@@ -1,4 +1,61 @@
 .exp-container{
     width: 100%;
-    height: 50%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-image: url("../../assets/images/global/backgroundWaves.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    & .carousel-container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 5%;
+    }
+
+    & .text-experiences{
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        padding: 0.5rem;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+
+        & p{
+            width: 60%;
+            padding: 0.5rem;
+            border-radius: 0 15px 0 15px;
+            font-size: 2rem;
+            text-align: center;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .exp-container{
+        flex-direction: column;
+
+        .carousel-container{
+            width: 100%;
+            height: auto;
+            padding-bottom: 5%;
+        }
+    
+        .text-experiences{
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    
 }

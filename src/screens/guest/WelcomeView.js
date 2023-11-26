@@ -8,6 +8,7 @@ import Footer from "../../components/Surfaces/Footer";
 import Team from './Team'
 import { Auth } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
+import Experiences from './Experiences'
 
 
 const WelcomeView = () => {
@@ -41,6 +42,10 @@ const WelcomeView = () => {
 
       <div className='team-container' id='team'>
         <Team></Team>
+      </div>
+
+      <div className='experiences-container'>
+        <Experiences></Experiences>
       </div>
 
       <div className='footer'>
