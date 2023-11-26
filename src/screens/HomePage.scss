@@ -1,6 +1,11 @@
 .home-main{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-height: 100vh;
+
+    background-image: url("../assets/images/global/border-back.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     & .nav-container{
         position: fixed;     // Fijar la posición
@@ -10,5 +15,53 @@
         background-color: #fff; // Puedes cambiar el color de fondo según tu diseño
         z-index: 1000;       // Asegura que la barra esté en la parte superior
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    & .options{
+        padding-top: 150px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.card {
+    height: 90%;
+    width: 95%;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+    margin-bottom: 2%;
+  
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+} 
+  
+.cardContent {
+    font-weight: bold;
+    text-align: center;
+}
+  
+.grid {
+    width: 100%;
+    min-height: calc(80vh - 20px);
+    flex: 1 0 auto;
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    grid-column: auto;
+}
+
+.grid-item {
+    height: 600px; 
+}
+
+@media (max-width: 768px) {
+    .home-main{
+        background-size: cover;
+    }
+    .card {
+      width: 90%;
     }
 }

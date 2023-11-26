@@ -2,28 +2,10 @@ import React , { useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import NavBar from '../components/Surfaces/NavBar'
+import Footer from '../components/Surfaces/Footer'
 import "./HomePage.scss"
 
 import { Auth } from '../api/auth';
-
-const cardStyles = {
-  card: {
-    height: '100%',
-    cursor: 'pointer',
-    transition: 'box-shadow 0.3s',
-    '&:hover': {
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
-    },
-  },
-  cardContent: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  grid:{
-    height: "500px"
-  }
-};
 
 const HomePage = () => {
   const auth = new Auth();
@@ -46,30 +28,29 @@ const HomePage = () => {
   };
 
   return (
-
     <div className='home-main'>
       <div className='nav-container'>
         <NavBar showOptions={false}/>
       </div>
+      
       <div className='options'>
-        <Typography variant="h2">Entrenamientos</Typography>
         <Box
           display="flex"
           justifyContent="center"
           alignItems="center"
-          height="calc(100vh - 60px)" 
+          className="box"
         >
-          <Grid container spacing={2}>
-            <Grid item xs={4} style={cardStyles.grid}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} className='grid' justifyContent="center" >
+            <Grid item xs={3} className='grid-item'>
               <Card
-                sx={cardStyles.card}
+                className='card'
                 onClick={() => handleCardClick("Entrenamiento Fisico")}
               >
-                <CardContent>
+                <CardContent className='cardContent'>
                   <Typography
                     variant="h5"
                     component="div"
-                    sx={cardStyles.cardContent}
+                    className='cardContent'
                   >
                     Entrenamiento Físico
                   </Typography>
@@ -77,16 +58,16 @@ const HomePage = () => {
               </Card>
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={3} className='grid-item'>
               <Card
-                sx={cardStyles.card}
+                className='card'
                 onClick={() => handleCardClick("Entrenamiento Cognitivo")}
               >
                 <CardContent>
                   <Typography
                     variant="h5"
                     component="div"
-                    sx={cardStyles.cardContent}
+                    className='cardContent'
                   >
                     Entrenamiento Cognitivo
                   </Typography>
@@ -94,16 +75,16 @@ const HomePage = () => {
               </Card>
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={3} className='grid-item'>
               <Card
-                sx={cardStyles.card}
+                className='card'
                 onClick={() => handleCardClick("Entrenamiento Conjunto")}
               >
                 <CardContent>
                   <Typography
                     variant="h5"
                     component="div"
-                    sx={cardStyles.cardContent}
+                    className='cardContent'
                   >
                     Entrenamiento Conjunto
                   </Typography>
@@ -112,6 +93,10 @@ const HomePage = () => {
             </Grid>
           </Grid>
         </Box>
+      </div>
+
+      <div>
+        <Footer></Footer>
       </div>
     </div>
     

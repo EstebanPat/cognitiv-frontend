@@ -73,7 +73,9 @@ const NavBar = () => {
                             </li>
 
                             <li>
-                                <NavLink to="/experiences">Experiencias significativas</NavLink>
+                                <Link to={"team"} smooth={true} offset={580} duration={500} onClick={handleOpenMenu}>
+                                    Experiencias
+                                </Link>
                             </li>
                         </ul>
                     </div>

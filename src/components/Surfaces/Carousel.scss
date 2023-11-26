@@ -22,14 +22,14 @@ $card-height: 36rem;
     scaleY(calc(1 + var(--abs-offset) * -0.8))
     translateZ(calc(var(--abs-offset) * -30rem))
     translateX(calc(var(--direction) * -5rem));
-  filter: blur(calc(var(--abs-offset) * 1rem));
+  filter: blur(calc(var(--abs-offset) * 0.5rem));
   transition: all 0.3s ease-out;
 }
 
 .card {
-  -webkit-box-shadow: 6px 7px 44px -4px rgba(0,0,0,0.79);
-  -moz-box-shadow: 6px 7px 44px -4px rgba(0,0,0,0.79);
-  box-shadow: 6px 7px 44px -4px rgba(0,0,0,0.79);
+  -webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.39);
+  -moz-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.39);
+  box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.39);
   width: 100%;
   height: 100%;
   padding: 1rem;
