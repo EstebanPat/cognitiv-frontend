@@ -22,7 +22,7 @@ $card-height: 38rem;
     scaleY(calc(1 + var(--abs-offset) * -0.8))
     translateZ(calc(var(--abs-offset) * -30rem))
     translateX(calc(var(--direction) * -5rem));
-  filter: blur(calc(var(--abs-offset) * 0.5rem));
+  filter: blur(calc(var(--abs-offset) * 0.1rem));
   transition: all 0.3s ease-out;
 }
 
