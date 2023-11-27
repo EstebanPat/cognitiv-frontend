@@ -159,9 +159,8 @@ const UserViewer = ({user, closeModal, disabled}) => {
           setSelectedActive(
             userDb.active
               ? activeOptions.find((option) => option.value === userDb.active)
-              : null
+              : activeOptions.find((option) => option.value === false)
           );
-          console.log(selectedActive)
         }
     }, [user, userDb]);
 
@@ -181,11 +180,22 @@ const UserViewer = ({user, closeModal, disabled}) => {
                 ...prevUserDb,
                 genre: value ? value.value : null,
             }));
-        }else if (field === 'selectedActive') {
-            setUserDb(prevUserDb => ({
-                ...prevUserDb,
-                active: value ? value.value : null,
-            }));
+        } else if (field === 'selectedActive') {
+            const selectedValue = value ? value : null;
+            setSelectedActive(selectedValue);
+        
+            if (selectedValue === null) {
+              setSelectedActive(activeOptions.find((option) => option.value === false));
+            }
+
+            if (selectedValue !== null) {
+                setUserDb(prevUserDb => ({
+                    ...prevUserDb,
+                    active: selectedValue.value,
+                }));
+            }
+
+
         } else if (field.startsWith('attendant.')) {
             const attendantField = field.split('.')[1];
             setUserDb(prevUserDb => ({
@@ -300,7 +310,7 @@ const UserViewer = ({user, closeModal, disabled}) => {
                                 sx={textInputStyles}
                                 renderInput={(params) => <TextField {...params} label="Tipo de Documento" />}
                                 value={selectedDocumentType}
-                                disabled={disabled}
+                                disabled={true}
                                 onChange={(event, newValue) => handleUserChange('selectedDocumentType', newValue)}
                             />
                             <TextField 
@@ -310,7 +320,7 @@ const UserViewer = ({user, closeModal, disabled}) => {
                                 className='input-auth-form' 
                                 sx={textInputStyles} 
                                 value={userDb ? userDb.identification : ""}
-                                disabled={disabled}
+                                disabled={true}
                                 onChange={(e) => handleUserChange('identification', e.target.value)}
                             />
                         </div>
@@ -324,7 +334,7 @@ const UserViewer = ({user, closeModal, disabled}) => {
                                 sx={textInputStyles}
                                 renderInput={(params) => <TextField {...params} label="Sexo" />}
                                 value={selectedGenre}
-                                disabled={disabled}
+                                disabled={true}
                                 onChange={(event, newValue) => handleUserChange('selectedGenre', newValue)}
                             />
 

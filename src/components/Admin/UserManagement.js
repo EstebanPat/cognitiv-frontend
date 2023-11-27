@@ -16,6 +16,7 @@ import { Auth } from "../../api/auth"
 import Swal from 'sweetalert2'
 
 import UserViewer from './Modals/UserViewer';
+import { Box, Tab, Tabs, TextField } from '@mui/material';
 
 const columns = [
   { id: 'names', label: 'Nombre(s)', minWidth: 130 },
@@ -28,13 +29,16 @@ const columns = [
 
 export default function StickyHeadTable() {
   const auth = new Auth();
-  
+
   const [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [user, setUser] = React.useState(null)
   const [viewer, setViewer] = React.useState(false)
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [filter, setFilter] = React.useState('active'); 
+  const [originalRows, setOriginalRows] = React.useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -70,14 +74,16 @@ export default function StickyHeadTable() {
         ...user,
         active: user.active ? 'Activo' : 'Inactivo'
       }));
-
+  
+      setOriginalRows(usersWithStatus);
       setRows(usersWithStatus);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const deleteUser = async (id) => {
+    console.log(id)
     Swal.fire({
       title: "¿Estás seguro de eliminar este usuario?",
       text: "Esta acción no se puede revertir",
@@ -101,17 +107,63 @@ export default function StickyHeadTable() {
     })
   }
 
+  const handleSearchChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+  
+    if (term === '') {
+      handleFilterChange(null, filter)
+    } else {
+      const userFiltered = rows.filter((row) => {
+        const name = row.names.toLowerCase();
+        return name.includes(term);
+      });
+      setRows(userFiltered);
+    }
+  };
+
+  const handleFilterChange = (event, newValue) => {
+    setFilter(newValue);
+    if (newValue === 'all') {
+      setRows(originalRows); 
+    } else if (newValue === 'active') {
+      const filteredUsers = originalRows.filter((row) => row.active.toLowerCase() === 'activo');
+      setRows(filteredUsers); 
+    } else {
+      const filteredUsers = originalRows.filter((row) => row.active.toLowerCase() === 'inactivo');
+      setRows(filteredUsers); 
+    }
+  };
+
   React.useEffect(() => {
     getUsers();
   }, []); 
 
   return (
-    <>
+    <div className='users-main' style={{ display:'flex', flexDirection:'column' }}>
+      <Box width={'100%'} height={70} sx={{display:'flex', flexDirection:'row'}}>
+        <TextField
+          label="Buscar por nombre"
+          onChange={handleSearchChange}
+          value={searchTerm}
+        />
+
+        <Tabs
+          value={filter}
+          onChange={handleFilterChange}
+          textColor="primary"
+          indicatorColor="primary"
+        >
+          <Tab label="Todos" value="all" />
+          <Tab label="Activos" value="active" />
+          <Tab label="Inactivos" value="inactive" />
+        </Tabs>
+      </Box>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow>
+              <TableRow >
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -128,7 +180,7 @@ export default function StickyHeadTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
@@ -167,6 +219,6 @@ export default function StickyHeadTable() {
       {open && (
         <UserViewer closeModal={closeModal} user={user} disabled={viewer}></UserViewer>
       )}
-    </>
+    </div>
   );
 }
