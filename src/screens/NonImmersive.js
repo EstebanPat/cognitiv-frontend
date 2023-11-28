@@ -24,8 +24,8 @@ const NonImmersive = () => {
     })
   }, [])
 
-  const goToRoutines = (routines) => {
-    navigate('routines', { state: { routines: routines}})
+  const goToRoutines = (routines, id) => {
+    navigate('routines', { state: { routines: routines, routineList_id: id }})
   }
 
   return (
@@ -42,7 +42,7 @@ const NonImmersive = () => {
                     Rutina {routine._id}
                   </Typography>
                   {!routine.finished && (
-                    <Button onClick={() => goToRoutines(routine.routines)}>En proceso</Button>
+                    <Button onClick={() => goToRoutines(routine.routines, routine._id)}>En proceso</Button>
                   )}
                 </div>
                 </CardContent>

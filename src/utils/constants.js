@@ -22,7 +22,7 @@ export const ENV = {
         MEMBERSHIPS: "memberships/",
         SUSCRIPTIONS: "suscriptions/new-suscription",
 
-        DELETESUB: "suscriptions/delete"
+        DELETESUB: "suscriptions/delete",
         GETSUB: "suscriptions/",
         ACTIVATE: "users/activate",
         CREATEROUTINES: "routines/new-routine",
@@ -30,6 +30,7 @@ export const ENV = {
         GETROUTINE: "routine/",
         GETTRAINING: "nonimtrainings/",
         FINISHROUTINE: "routine/finish/",
+        CREATETRAININGINFO: "nonimtrainingsinfo/new-nonimtraininginfo"
     },
     JWT: {
         ACCESS: "access",
