@@ -33,7 +33,7 @@ export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [user, setUser] = React.useState(null)
+  const [subid, setUser] = React.useState(null)
   const [viewer, setViewer] = React.useState(false)
 
   const handleChangePage = (event, newPage) => {
@@ -161,7 +161,7 @@ export default function StickyHeadTable() {
       </Paper>
 
       {open && (
-        <SubViewer closeModal={closeModal} sub={user} disabled={viewer}></SubViewer>
+        <SubViewer closeModal={closeModal} sub={subid} disabled={viewer}></SubViewer>
       )}
     </>
   );

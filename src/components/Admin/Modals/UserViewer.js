@@ -216,7 +216,7 @@ const UserViewer = ({user, closeModal, disabled}) => {
     return (
         <Modal open={true} onClose={closeModal}>
             <>
-                <Box className="membership-modal-container" sx={{ maxHeight: '85vh', overflowY: 'auto' }}>
+                <Box className="user-modal-container" sx={{ maxHeight: '85vh', overflowY: 'auto' }}>
                     <form className='form'>
                         <div className='title'>
                             <h1>Usuario</h1>
