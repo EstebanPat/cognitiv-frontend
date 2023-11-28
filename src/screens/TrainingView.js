@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Routines } from '../api/routines/index';
-import YouTube from 'react-youtube';
 import './TrainingView.scss'
 import { Typography, Button } from '@mui/material';
 
@@ -9,7 +8,7 @@ const TrainingView = () => {
     const trainingApi = new Routines();
     const navigate = useNavigate();
     const { state } = useLocation()
-    const { routine } = state;
+    const { routine, routineList_id } = state;
     const [allTrainings, setAllTrainings] = useState([]);
     const [actualTraining, setActualTraining] = useState([]);
     const [actualTrainingType, setActualTrainingType] = useState('');
@@ -17,7 +16,9 @@ const TrainingView = () => {
     const [time, setTime] = useState(0);
     const [running, setRunning] = useState(true);
     const [buttonContent, setButtonContent] = useState('Siguiente Ejercicio')
-
+    const [trainingTimes, setTrainingTimes] = useState([]);
+    const [lastTime, setLastTime] = useState(0);
+    const [finishRoutine, setFinishRoutine] = useState('')
 
     const timer = useRef() 
     const timerFormat = (time) => {
@@ -60,22 +61,36 @@ const TrainingView = () => {
                 setTime(pre => pre + 1)
             }, 1000)
         }
-    }, running)
+    }, running);
+
+    useEffect(() => {
+        if (finishRoutine === "Finalizar") {
+          console.log(trainingTimes);
+          finish();
+        }
+      }, [buttonContent, trainingTimes]);
 
     const handleNextVideo = () => {
+        const info = {
+            training_id: actualTraining._id,
+            time: time - lastTime
+        }
+        setLastTime(time)
+        setTrainingTimes([... trainingTimes, info])
+        console.log(info);
         const currentIndex = allTrainings.findIndex(training => training === actualTraining);
         const nextIndex = (currentIndex + 1) % allTrainings.length;
         setActualTraining(allTrainings[nextIndex]);
         setActualTrainingType(allTrainings[nextIndex].type);
-
+        
         if(currentIndex === 3){
-            console.log("Ya hizo todos los ejercicios");
             setButtonContent("Finalizar Rutina");
         }
 
-        if(buttonContent === "Finalizar Rutina" && currentIndex !== 3){
-            finish()
-        }
+        if(currentIndex === 4){
+            setFinishRoutine("Finalizar");
+        } 
+        
     };
 
     const showSeconds = () => {
@@ -83,10 +98,22 @@ const TrainingView = () => {
     }
 
     const finish = async () => {
-        const response = await trainingApi.finishRoutine(routine._id);
+        const trainingInfo = {
+            routine_id: routine._id,
+            routinelist_id: routineList_id,
+            trainings_times: trainingTimes
+        }
+        
+        try {
+            const response = await trainingApi.finishRoutine(routine._id);
+            const response2 = await trainingApi.createTrainingInfo(trainingInfo)
+        } catch (error) {
+            console.log(error);
+        }
+        
 
-        console.log(response);
-        navigate('routines')
+        
+        navigate('/home/physicaltrainings/nonimmersive', )
     }
 
     return (

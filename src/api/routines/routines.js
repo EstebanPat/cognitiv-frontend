@@ -100,5 +100,29 @@ export class Routines{
         }
       }
 
+      async createTrainingInfo(trainingInfo){
+        const accessToken = localStorage.getItem("access");
+        const response = await fetch(`${BASE_API_URL}${API_ROUTER.CREATETRAININGINFO}`,{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`
+          },
+          body: JSON.stringify(trainingInfo),
+        })
+
+        try {
+          if (response.status !== 200) {
+            const errorData = await response.json();
+            throw new Error(errorData.error);
+          }else{
+            const msessage = await response.json();
+            return msessage
+          }
+        } catch (error) {
+          throw error;
+        }
+      }
+
 
 }
