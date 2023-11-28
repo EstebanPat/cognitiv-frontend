@@ -11,6 +11,7 @@ import HomePage from './screens/HomePage';
 import PhysicalTrainings from './screens/PhysicalTrainings';
 import NonImmersive from './screens/NonImmersive';
 import RoutinesView from './screens/RoutinesView';
+import TrainingView from './screens/TrainingView';
 
 import Membserships from './screens/MembsershipsList';
 import SuccesSignUp from './screens/userProccess/SuccesSignUp';
@@ -28,6 +29,7 @@ root.render(
             <Route path="home/physicaltrainings" element={<PhysicalTrainings />} />
             <Route path="home/physicaltrainings/nonimmersive" element={<NonImmersive />} />
             <Route path="home/physicaltrainings/nonimmersive/routines" element={<RoutinesView />} />
+            <Route path="home/physicaltrainings/nonimmersive/routines/trainings" element={<TrainingView />} />
             <Route path="signup/membership" element={<Membserships />} />
             <Route path="successRegistration" element={<SuccesSignUp />} />
             <Route path="activateAccount/*" element={<ActivateView />} />
@@ -35,6 +37,7 @@ root.render(
             <Route path="forgotpass/*" element={<ForgotPass />} />
             <Route path="changepassword/*" element={<PassRecovering />} />
             <Route path="privacypolicy/" element={<PrivacyAndPolicy />} />
+
         </Routes>
     </BrowserRouter>
 );

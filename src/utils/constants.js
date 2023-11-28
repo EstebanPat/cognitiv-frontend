@@ -20,7 +20,9 @@ export const ENV = {
         ACTIVATE: "users/activate",
         CREATEROUTINES: "routines/new-routine",
         GETLIST: "routines/byId",
-        GETROUTINE: "routine/"
+        GETROUTINE: "routine/",
+        GETTRAINING: "nonimtrainings/",
+        FINISHROUTINE: "routine/finish/",
     },
     JWT: {
         ACCESS: "access",
