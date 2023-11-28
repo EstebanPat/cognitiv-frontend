@@ -1,0 +1,75 @@
+.routines-container{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #004D0B;
+        
+    & .routines-list-container{
+        display: flex;
+        flex-direction: row;
+        height: auto;
+        flex-wrap: wrap;
+        & .routine-list-item{
+            height: 30vh;
+            width: 50%;
+            & .routine-card{
+                display: flex;
+                width: 100%;
+                height: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+
+                & .logo{
+                    width: 12%;
+                }
+
+                & .checkicon{
+                    display: flex;
+                    justify-content: center;
+                    width: 15%;
+                    flex-direction: column;
+                }
+
+                & .routine-button{
+                    
+                    background-color: #8BCD8D;
+                    color: black;
+                    &:hover {
+                        background-color: #4EA550;
+                        color: black;
+                      }
+                }
+                & .routine-card-content{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    & .routine-card-content-day{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                    }
+
+                    & .exercises{
+                        height: 100%;
+                        margin-right: 200px;
+                    }
+                }
+            }
+        }
+        
+    }
+    
+
+    @media (max-width: 1000px) {
+    
+        & .routines-list {
+            & .routines-list-container {
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    }
+}
