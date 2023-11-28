@@ -1,8 +1,8 @@
 nav {
     height: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     background-color: #FEFEFA;
     padding-left: 6rem;
     padding-right: 6rem;
@@ -18,7 +18,7 @@ nav {
             max-width: 15rem;
         }
     }
-
+    
     & ul {
         display: flex;
 
@@ -42,66 +42,89 @@ nav {
         }
     }
 
-    & .menu {
-        display: none;
-        position: absolute;
-        top: 0.75rem;
-        right: 0.5rem;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 2.25rem;
-        height: 2rem;
 
-        & span {
-            height: 0.4rem;
-            width: 100%;
-            background-color: #fff;
-            border-radius: 0.2rem;
+    & .mobile{
+        display: none;
+        & .menu-btn{
+            cursor: pointer;
+            & svg {
+                font-size: 40px;
+                color: #357960;
+            }
+        }
+    }
+
+    & .auth-menu{
+        & .icon-container{
+            & svg{
+                font-size: 45px;
+            }
         }
     }
 }
 
-@media (max-width: 1000px) {
-    nav .menu {
-        display: flex;
-        height: 100%;
-        margin-top: -2%;
-        margin-right: 2%;
-        justify-content: center;
-        & span{
-            margin: 4px;
-            background-color: #13511a;
+@media (max-width: 768px){
+    nav{
+        & .title {    
+            & .logo{
+                max-width: 10rem;
+            }
         }
-    }
 
-    nav {
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: center;
-    }
+        padding-left: 0rem;
+        padding-right: 1rem;
+        
+        & ul.openMenu{
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: fixed;
+            top: 111px;
+            right: 0px;
+            width: 300px;
+            height: 100vh;
+            background-color: #357960;
 
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.25rem;
-    }
+            & li{
+                margin-bottom: 10px;
+                margin-top: 20px;
 
-    nav ul.open {
-        display: flex;
-        background-color: #FEFEFA;
-        width: 100%;
-        border: 2px solid #13511a;
-        border-radius: 10px;
-        padding: 0;
-    }
+                & a{
+                    color: #FEFEFA;
+                }
+            }
+        }
 
-    nav ul li {
-        width: 100%;
-        text-align: center;
-    }
+        & ul.menu{
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: fixed;
+            top: 111px;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #357960;
 
-    nav ul li a {
-        margin: 0.2rem 0.5rem;
+            & li{
+                margin-bottom: 10px;
+                margin-top: 20px;
+
+                & a{
+                    color: #FEFEFA;
+                }
+            }
+        }
+
+        & .mobile{
+            display: block;
+
+            & .menu-btn{
+                & svg {
+                    font-size: 40px;
+                    color: #357960;
+                }
+            }
+        }
     }
 }

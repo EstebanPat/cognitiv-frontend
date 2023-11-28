@@ -76,10 +76,8 @@ const PassRecovering = () => {
         }else{
             setError("")
             setOpenSnackbar(false)
-            setShowModal(true)
 
             try {
-
                 const data = {
                     password: password
                 }
@@ -90,7 +88,6 @@ const PassRecovering = () => {
                 }
             } catch (error) {
                 setError(error.message || 'Ocurrió un error');
-                setOpenSnackbar(true)
             }
         }
     }

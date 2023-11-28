@@ -1,48 +1,33 @@
-import Prueba1 from "../../assets/videos/Prueba1.mp4";
-import Prueba2 from "../../assets/videos/Prueba2.mp4";
-import "./Carousel.css";
-import React from "react";
-import { Carousel } from "react-bootstrap";
-import ReactPlayer from "react-player";
-import "bootstrap/dist/css/bootstrap.css";
+import React, {useState} from 'react';
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import "./Carousel.scss"
 
-const VideoCarousel = () => {
-    const videoProperties = [
-        {
-            id: 1,
-            title: "Video 1",
-            src: Prueba1,
-        },
-        {
-            id: 2,
-            title: "Video 2",
-            src: Prueba2,
-        },
-    ];
+const MAX_VISIBILITY = 2;
 
-    return (
-        <div className="App">
-            <Carousel className="carousel">
-                {videoProperties.map((videoObj) => {
-                    return (
-                        <Carousel.Item key={videoObj.id} className="item">
-                            <div className="video-container">
-                                <ReactPlayer
-                                    url={videoObj.src}
-                                    pip={true}
-                                    style={{flex:1, justifyContent:"center"}}
-                                    controls={true}
-                                    playing={true}
-                                    width="100%"   // Deja que el ancho se ajuste automáticamente
-                                    height="500px" // Establece una altura fija para videos verticales
-                                />
-                            </div>
-                        </Carousel.Item>
-                    );
-                })}
-            </Carousel>
+const Carousel = ({children}) => {
+  const [active, setActive] = useState(1);
+  const count = React.Children.count(children);
+  
+  return (
+    <div className='carousel'>
+      {active > 0 && <button className='nav left' onClick={() => setActive(i => i - 1)}><ArrowBackIos/></button>}
+      {React.Children.map(children, (child, i) => (
+        <div className='card-container' style={{
+            '--active': i === active ? 1 : 0,
+            '--offset': (active - i) / 3,
+            '--direction': Math.sign(active - i),
+            '--abs-offset': Math.abs(active - i) / 3,
+            'pointer-events': active === i ? 'auto' : 'none',
+            'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
+            'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
+          }}>
+          {child}
         </div>
-    );
+      ))}
+      {active < count - 1 && <button className='nav right' onClick={() => setActive(i => i + 1)}><ArrowForwardIosIcon/></button>}
+    </div>
+  );
 };
 
-export default VideoCarousel;
+export default Carousel

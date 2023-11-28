@@ -69,6 +69,8 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
+        padding-bottom: 50px;
+        padding-top: 40px;
 
         & .book-one,.book-two{
             width: 50%;
@@ -90,7 +92,6 @@
             }
 
             .book-one-text{
-                width: 100%;
                 height: auto;
                 display: flex;
                 margin: 2%;
@@ -171,7 +172,6 @@
     & .info{
         width: 100%;
         height: auto;
-        margin-top: 4%;
         padding-top: 2%;
         padding-bottom: 2%;
         display: flex;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import "./WelcomeView.scss"
 import LoginForm from '../../components/Auth/LogIn/LoginForm'
 import image1 from "../../assets/images/home/welcome.png"
@@ -6,9 +6,20 @@ import NavBar from '../../components/Surfaces/NavBar'
 import WhoWeAre from "./WhoWeAre";
 import Footer from "../../components/Surfaces/Footer";
 import Team from './Team'
+import { Auth } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
+import Experiences from './Experiences'
 
 
 const WelcomeView = () => {
+  const auth = new Auth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(auth.getAccessToken() !== null){
+      navigate("/home");
+    }
+  }, [])
   
   return (
     <div className='main'>
@@ -31,6 +42,10 @@ const WelcomeView = () => {
 
       <div className='team-container' id='team'>
         <Team></Team>
+      </div>
+
+      <div className='experiences-container'>
+        <Experiences></Experiences>
       </div>
 
       <div className='footer'>

@@ -11,11 +11,18 @@ export const ENV = {
         LOGIN: "users/login",
         REGISTER: "users/signup",
         USERS: "users/",
-        MEMBERSHIPS: "memberships/",
-        SUSCRIPTIONS: "suscriptions/new-suscription",
         UPDATE: "users/update",
         ACTIVATE: "users/activate",
         FORGOT: "users/forgotpass",
+
+        GETME: "users/auth/getme",
+        DELETE: "users/delete",
+        UPDATEADMIN: "users/admin/update",
+
+        MEMBERSHIPS: "memberships/",
+        SUSCRIPTIONS: "suscriptions/new-suscription",
+
+        DELETESUB: "suscriptions/delete"
         GETSUB: "suscriptions/",
         ACTIVATE: "users/activate",
         CREATEROUTINES: "routines/new-routine",
