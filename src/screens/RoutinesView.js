@@ -1,20 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Routines } from '../api/routines/index'
-import { Button, Card, CardContent, List, ListItem, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom';
+import { Button, Card, CardContent, List, ListItem, Tooltip, Typography } from '@mui/material'
+import { useNavigate, Link } from 'react-router-dom';
 import './RoutinesView.scss'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import RoutineModal from '../components/RoutineModal';
+
+import logoICO from "../assets/icons/logoICO.png"
 
 const RoutinesView = () => {
-    const routineApi = new Routines()
-    const {state} = useLocation()
+    const navigate = useNavigate();
+    const routineApi = new Routines();
+    const { state } = useLocation();
     const { routines } = state;
     const [allRoutines, setAllRoutines] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [firstFalse, setFirstFalse] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [lastFinished, setLastFinished] = useState(null);
     let isFirstUnfinishedRoutine = false;
 
-    const list = []
+
+    const openModal = () => {
+        setShowModal(true);
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
+    }
     useEffect(() => {
 
         const fetchData = async () => {
@@ -46,12 +59,15 @@ const RoutinesView = () => {
             const milisegundosEnUnDia = 24 * 60 * 60 * 1000;
             if(diferenciaEnMilisegundos >= milisegundosEnUnDia){
                 console.log("Si la puede realizar");
-                
+                navigate('trainings', { state: { routine: routine}})
             }else{
+                setLastFinished(lastFinishedRoutineDate.toString())
+                openModal()
                 console.log("No la puede realizar");
             }
         } else {
             console.log("No ha realizado ninguna rutina", lastFinishedRoutine);
+            navigate('trainings', { state: { routine: routine}})
         }
 
     }
@@ -69,15 +85,88 @@ const RoutinesView = () => {
                             <ListItem key={routine._id} className='routine-list-item'>
                                 <Card className='routine-card'>
                                     <CardContent className='routine-card-content'>
-                                        <div>
-                                            <Typography variant="p" component="div">
+                                        <div className='routine-card-content-day'>
+                                            <Typography variant="p" component="div" fontSize={22} fontFamily={'fantasy'}>
                                                 DIA {routine.order}
                                             </Typography>
                                         </div>
+                                        <div className='exercises'>
+                                            <Typography fontFamily={'cursive'} fontSize={20} 
+                                                fontWeight={'bold'} sx={{marginBottom: "10px"}}
+                                                >Ejercicios de
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Equilibrio
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                        </div>
                                     </CardContent>
-                                    <Button onClick={() => doRoutine(routine)}>
+                                    <Button onClick={() => doRoutine(routine)} variant="contained"
+                                        color="primary" className='routine-button'>
                                         Empezar
                                     </Button>
+                                </Card>
+                            </ListItem>
+                        );
+                    } else if(routine.finish === true){
+                        return (
+                            <ListItem key={routine._id} className='routine-list-item'>
+                                <Card className='routine-card'>
+                                    <CardContent className='routine-card-content'>
+                                        <div className='routine-card-content-day'>
+                                            <Typography variant="p" component="div" fontSize={22} fontFamily={'fantasy'}>
+                                                DIA {routine.order}
+                                            </Typography>
+                                        </div>
+                                        <div className='exercises'>
+                                            <Typography fontFamily={'cursive'} fontSize={20} 
+                                                fontWeight={'bold'} sx={{marginBottom: "10px"}}
+                                                >Ejercicios de
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Equilibrio
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                        </div>
+                                    </CardContent>
+                                    <div className='checkicon'>
+                                        <Tooltip title="Terminado" arrow >
+                                            <CheckCircleIcon  style={{ color: 'green', fontSize: 40 }}/>
+                                        </Tooltip>
+                                    </div>
+                                    
                                 </Card>
                             </ListItem>
                         );
@@ -86,12 +175,39 @@ const RoutinesView = () => {
                             <ListItem key={routine._id} className='routine-list-item'>
                                 <Card className='routine-card'>
                                     <CardContent className='routine-card-content'>
-                                        <div>
-                                            <Typography variant="p" component="div">
+                                        <div className='routine-card-content-day'>
+                                            <Typography variant="p" component="div" fontSize={22} fontFamily={'fantasy'}>
                                                 DIA {routine.order}
                                             </Typography>
                                         </div>
+                                        <div className='exercises'>
+                                            <Typography fontFamily={'cursive'} fontSize={20} 
+                                                fontWeight={'bold'} sx={{marginBottom: "10px"}}
+                                                >Ejercicios de
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Equilibrio
+                                            </Typography>
+                                            <Typography fontFamily={'cursive'} fontSize={16}
+                                                sx={{marginLeft: "12px"}}
+                                                >Flexibilidad
+                                            </Typography>
+                                        </div>
                                     </CardContent>
+                                    <img src={logoICO} alt='' className='logo'></img>
                                 </Card>
                             </ListItem>
                         );
@@ -99,7 +215,7 @@ const RoutinesView = () => {
                 })
             }
         </List>
-        
+        {showModal && <RoutineModal closeModal={closeModal} lastFinishedRoutine={lastFinished}/> }
     </div>
   )
 }
