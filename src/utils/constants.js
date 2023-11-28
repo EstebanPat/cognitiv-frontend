@@ -14,6 +14,7 @@ export const ENV = {
         UPDATE: "users/update",
         ACTIVATE: "users/activate",
         FORGOT: "users/forgotpass",
+
         GETME: "users/auth/getme",
         DELETE: "users/delete",
         UPDATEADMIN: "users/admin/update",
@@ -21,9 +22,14 @@ export const ENV = {
         MEMBERSHIPS: "memberships/",
         SUSCRIPTIONS: "suscriptions/new-suscription",
 
-
-        GETSUB: "suscriptions/",
         DELETESUB: "suscriptions/delete"
+        GETSUB: "suscriptions/",
+        ACTIVATE: "users/activate",
+        CREATEROUTINES: "routines/new-routine",
+        GETLIST: "routines/byId",
+        GETROUTINE: "routine/",
+        GETTRAINING: "nonimtrainings/",
+        FINISHROUTINE: "routine/finish/",
     },
     JWT: {
         ACCESS: "access",
