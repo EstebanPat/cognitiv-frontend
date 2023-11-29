@@ -24,6 +24,7 @@ export const ENV = {
 
         DELETESUB: "suscriptions/delete",
         GETSUB: "suscriptions/",
+        ACTIVATESUB: "suscriptions/admin/activate/",
         ACTIVATE: "users/activate",
         CREATEROUTINES: "routines/new-routine",
         GETLIST: "routines/byId",

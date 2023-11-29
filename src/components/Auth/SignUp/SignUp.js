@@ -217,7 +217,7 @@ const SignUp = () => {
             return;
         }
 
-        const stringRegex = /^[A-Za-zñÑ]+$/;
+        const stringRegex = /^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/;
         if (!stringRegex.test(names) 
             || !stringRegex.test(namesAttendant) 
             || !stringRegex.test(lastnames)

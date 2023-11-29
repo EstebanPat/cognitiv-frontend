@@ -66,7 +66,7 @@ export class Suscription {
     }
 
     removeSub = async (id) => {
-      const accessToken = localStorage.getItem("access");;
+      const accessToken = localStorage.getItem("access");
 
       const response = await fetch(`${BASE_API_URL}${API_ROUTER.DELETESUB}/${id}`,{
         method: "DELETE",
@@ -82,4 +82,28 @@ export class Suscription {
         throw error
       }
     }; 
+
+    activateSub = async (id, data) => {
+      const accessToken = localStorage.getItem("access");
+      const response = await fetch(`${BASE_API_URL}${API_ROUTER.ACTIVATESUB}${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        
+        body: JSON.stringify(data),
+      });
+      try {
+        if (response.status !== 200) {
+          const errorData = await response.json();
+          throw new Error(errorData.error);
+        }else{
+          return true
+        }
+      } catch (error) {
+        console.log(error)
+        throw error;
+      }
+    }
 }

@@ -35,6 +35,7 @@ const openedMixin = (theme) => ({
   overflowX: 'hidden',
 });
 
+
 const closedMixin = (theme) => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -122,7 +123,7 @@ export default function SideNav() {
             >
                 <MenuIcon />
             </IconButton>
-            <Link to={"/"} smooth={true} offset={-110} duration={500} className='title'>
+            <Link to={"/"} offset={-110} duration={500} className='title'>
               <img src={logo} alt='' className='logo' width={'30%'}></img>
             </Link> 
             </Toolbar>

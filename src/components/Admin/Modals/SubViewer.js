@@ -1,4 +1,4 @@
-import { Box, FormControl, IconButton, InputAdornment, InputLabel, Modal, OutlinedInput } from '@mui/material'
+import { Box, Modal } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Autocomplete, Button, TextField } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -8,7 +8,6 @@ import "./UserViewer.scss"
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { Suscription } from '../../../api/suscriptions/index'
 import Swal from 'sweetalert2';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const textInputStyles = {
     width:"100%",
@@ -38,7 +37,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
         }
     }
 
-    const updateUser = async () => {
+    const updateSub = async () => {
         Swal.fire({
             title: "¿Estás seguro que desea editar este usuario?",
             icon: "warning",
@@ -52,7 +51,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
           }).then(async (result) => {
             if(result.value){
                 try {
-                    /* const response = await auth.updateAdmin(updatedUserDb, sub); 
+                    const response = await subs.activateSub(subDb._id, subDb);
                     if(response === true){
                         Swal.fire({
                             title: "Editado",
@@ -63,12 +62,12 @@ const SubViewer = ({sub, closeModal, disabled}) => {
                             }
                         });
                         closeModal()
-                    } */
+                    }
                 } catch (error) {
                     console.error(error);
                 }
             }
-          })  
+        })  
     }
     
     useEffect(() => {
@@ -89,47 +88,27 @@ const SubViewer = ({sub, closeModal, disabled}) => {
     }, [sub, subDb]);
 
     const handleUserChange = (field, value) => {
-        if (field === 'selectedSchooling') {
-            setSubDb(prevUserDb => ({
-                ...prevUserDb,
-                schooling: value ? value.value : null,
-            }));
-        } else if (field === 'selectedDocumentType') {
-            setSubDb(prevUserDb => ({
-                ...prevUserDb,
-                documentType: value ? value.value : null,
-            }));
-        } else if (field === 'selectedGenre') {
-            setSubDb(prevUserDb => ({
-                ...prevUserDb,
-                genre: value ? value.value : null,
-            }));
-        }else if (field === 'selectedActive') {
-            setSubDb(prevUserDb => ({
-                ...prevUserDb,
+        let updatedSubDb = { ...subDb };
+    
+        switch (field) {
+            case 'selectedActive':
+                updatedSubDb = {
+                ...subDb,
                 active: value ? value.value : null,
-            }));
-        } else if (field.startsWith('attendant.')) {
-            const attendantField = field.split('.')[1];
-            setSubDb(prevUserDb => ({
-                ...prevUserDb,
-                attendant: {
-                    ...prevUserDb.attendant,
-                    [attendantField]: value,
-                },
-            }));
-        } else {
-            setSubDb(prevUserDb => ({
-                ...prevUserDb,
-                [field]: value,
-            }));
+                };
+                break;
+        
+            default:
+                break;
         }
+    
+        setSubDb(updatedSubDb);
     };
 
     return (
         <Modal open={true} onClose={closeModal}>
             <>
-                <Box className="membership-modal-container" sx={{ maxHeight: '85vh', overflowY: 'auto' }}>
+                <Box className="user-modal-container" sx={{ maxHeight: '85vh', overflowY: 'auto' }}>
                     <form className='form' style={{width:'100%'}}>
                         <div className='title'>
                             <h1>Suscripción</h1>
@@ -152,8 +131,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
                                 className='input-auth-form' 
                                 sx={textInputStyles} 
                                 value={subDb ? subDb.duration : ""}
-                                disabled={disabled}
-                                onChange={(e) => handleUserChange('email', e.target.value)}
+                                disabled={true}
                             />
                         </div>
 
@@ -165,8 +143,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
                                 variant="outlined" 
                                 className='input-auth-form' 
                                 value={subDb ? subDb.user_id : ""}
-                                disabled={disabled}
-                                onChange={(e) => handleUserChange('names', e.target.value)}
+                                disabled={true}
                             />
 
                             <TextField 
@@ -176,8 +153,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
                                 className='input-auth-form' 
                                 sx={textInputStyles} 
                                 value={subDb ? subDb.membership_id : ""}
-                                disabled={disabled}
-                                onChange={(e) => handleUserChange('email', e.target.value)}
+                                disabled={true}
                             />
                         </div>
 
@@ -188,8 +164,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
                                     label="Fecha de inicio" 
                                     sx={textInputStyles} 
                                     value={selectedStartDate}
-                                    disabled={disabled}
-                                    /* onChange={(newValue) => setSelectedBirthDay(newValue)} */
+                                    disabled={true}
                                 />
                             </LocalizationProvider>
 
@@ -199,24 +174,27 @@ const SubViewer = ({sub, closeModal, disabled}) => {
                                     label="Fecha final" 
                                     sx={textInputStyles} 
                                     value={selectedEndDate}
-                                    disabled={disabled}
-                                    /* onChange={(newValue) => setSelectedBirthDay(newValue)} */
+                                    disabled={true}
                                 />
                             </LocalizationProvider>
                         </div>
 
-                        <div className='reg-form__row'>
-                            <Autocomplete
-                                disablePortal
-                                id="combo-box-demo"
-                                options={activeOptions}
-                                sx={textInputStyles}
-                                renderInput={(params) => <TextField {...params} label="Estado" />}
-                                value={subDb ? activeOptions.find((option) => option.value === subDb.active) : null}
-                                disabled={disabled}
-                                onChange={(event, newValue) => handleUserChange('selectedActive', newValue)}
-                            />
-                        </div>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={activeOptions}
+                            sx={textInputStyles}
+                            renderInput={(params) => <TextField {...params} label="Estado" />}
+                            value={
+                                subDb ?
+                                    activeOptions.find((option) => option.value === subDb.active) || null
+                                    : activeOptions.find((option) => option.value === false)
+                            }
+                            disabled={false}
+                            onChange={(event, newValue) =>
+                                handleUserChange('selectedActive', newValue)
+                            }
+                        />
 
                         <div className='reg-form__row'>
                             {subDb && subDb.voucher && (
@@ -230,7 +208,7 @@ const SubViewer = ({sub, closeModal, disabled}) => {
 
                         <div className='reg-form__row'>
                             {disabled ? <></> : 
-                                <Button variant="contained" style={{ background: "#357960", borderRadius: "10px" }} onClick={updateUser}>
+                                <Button variant="contained" style={{ background: "#357960", borderRadius: "10px" }} onClick={updateSub}>
                                     Editar
                                 </Button>
                             }
