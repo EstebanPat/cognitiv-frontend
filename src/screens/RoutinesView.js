@@ -98,11 +98,11 @@ const RoutinesView = () => {
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Fuerza muscular
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Resistencia aerobica
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
@@ -142,11 +142,11 @@ const RoutinesView = () => {
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Fuerza muscular
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Resistencia aerobica
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
@@ -188,11 +188,11 @@ const RoutinesView = () => {
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Fuerza muscular
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Resistencia aerobica
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
