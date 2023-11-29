@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, CardContent, List, ListItem, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
-
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 import { Routines } from '../api/routines/index';
 import './NonImmersive.scss'
+import NavBar from '../components/Surfaces/NavBar';
+import Footer from '../components/Surfaces/Footer';
 
 const NonImmersive = () => {
 
@@ -29,29 +33,48 @@ const NonImmersive = () => {
   }
 
   return (
-    <div className='list-container'>
-      <Typography variant='h2'>RUTINAS</Typography>
-      <List >
-        {routinesList &&
-          routinesList.map((routine) => (
-            <ListItem key={routine._id}>
-              <Card>
-                <CardContent>
-                <div>
-                  <Typography variant="p" component="div">
-                    Rutina {routine._id}
-                  </Typography>
-                  {!routine.finished && (
-                    <Button onClick={() => goToRoutines(routine.routines)}>En proceso</Button>
-                  )}
-                </div>
-                </CardContent>
-              </Card>
-            </ListItem>
-          ))
-        }
-      </List>
+    <div className='noim-container'>
+      <div className='nav-container'>
+        <NavBar showOptions={false}/>
+      </div>
+
+      <div className='list-container'>
+        <p className='list-title'>Rutinas</p>
+        <List className='rut-list-container'>
+          {routinesList &&
+            routinesList.map((routine) => (
+              <ListItem key={routine._id} >
+                <Card className='card-rut'>
+                  <CardContent sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+                    <div>
+                      <div className='dec-icons' style={{ display:'flex', flexDirection:'row', justifyContent:'space-evenly' }}>
+                        <PsychologyIcon></PsychologyIcon> 
+                        <FitnessCenterIcon></FitnessCenterIcon>
+                        <SportsGymnasticsIcon></SportsGymnasticsIcon>
+                      </div>
+                      
+                      <p className='title-rut'>
+                        Rutina actual
+                      </p>
+                      {!routine.finished && (
+                        <Button onClick={() => goToRoutines(routine.routines)} sx={{marginTop:10}} variant="contained" color="success">
+                          En proceso
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </ListItem>
+            ))
+          }
+        </List>
+      </div>
+
+      <div className='footer'>
+        <Footer></Footer>
+      </div>
     </div>
+    
   )
 }
 
