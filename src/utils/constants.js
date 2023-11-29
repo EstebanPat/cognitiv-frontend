@@ -22,7 +22,7 @@ export const ENV = {
         MEMBERSHIPS: "memberships/",
         SUSCRIPTIONS: "suscriptions/new-suscription",
 
-        DELETESUB: "suscriptions/delete"
+        DELETESUB: "suscriptions/delete",
         GETSUB: "suscriptions/",
         ACTIVATE: "users/activate",
         CREATEROUTINES: "routines/new-routine",
