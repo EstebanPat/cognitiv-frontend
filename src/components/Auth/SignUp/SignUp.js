@@ -23,6 +23,9 @@ const SignUp = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [openSnackbarDuplicated, setOpenSnackbarDuplicated] = useState(false);
     const [openSnackbarTerms, setOpenSnackbarTerms] = useState(false);
+    const [openSnackbarValidation, setOpenSnackbarValidation] = useState(false);
+    const [errorValidation, setErrorValidation] = useState("")
+
     /* Information of the Attendant (if the user needs one) */
     const [namesAttendant, setNamesAttendant] = useState('');
     const [lastnamesAttendant, setLastnamesAttendant] = useState('');
@@ -181,7 +184,10 @@ const SignUp = () => {
         if (reason === 'clickaway') {
             return;
         }
+        setOpenSnackbarDuplicated(false)
+        setOpenSnackbarTerms(false)
         setOpenSnackbar(false);
+        setOpenSnackbarValidation(false);
     };
 
     const handleAcceptTerms = (event) => {
@@ -189,7 +195,11 @@ const SignUp = () => {
     }
 
     const handleSave = async () => {
-        // Validar campos antes de enviar el formulario
+        setOpenSnackbarDuplicated(false)
+        setOpenSnackbarTerms(false)
+        setOpenSnackbar(false);
+        setOpenSnackbarValidation(false);
+
         if (
             !names ||
             !lastnames ||
@@ -205,6 +215,54 @@ const SignUp = () => {
         ) {
             setOpenSnackbar(true);
             return;
+        }
+
+        const stringRegex = /^[A-Za-zñÑ]+$/;
+        if (!stringRegex.test(names) 
+            || !stringRegex.test(namesAttendant) 
+            || !stringRegex.test(lastnames)
+            || !stringRegex.test(lastnamesAttendant)){
+            setErrorValidation("Los nombres y apellidos no pueden contener números");
+            setOpenSnackbarValidation(true);
+            return;
+        }
+
+        const phoneRegex = /^\d+$/;
+        if (!phoneRegex.test(phone.trim()) || !phoneRegex.test(phoneAttendant.trim())){
+            setErrorValidation("El teléfono debe estar compuesto por solo numeros");
+            setOpenSnackbarValidation(true);
+            return;
+        }
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;       
+        if (!emailRegex.test(email) || !emailRegex.test(emailAttendant)){
+            setErrorValidation("Debe ingresar un email válido");
+            setOpenSnackbarValidation(true)
+            return
+        }
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@[-`{-~]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            if (password.length < 6) {
+                setErrorValidation("La contraseña debe tener al menos 6 caracteres");
+                setOpenSnackbarValidation(true)
+                return
+            }
+            if (!/(?=.*[A-Z])/.test(password)) {
+                setErrorValidation("La contraseña debe contener al menos una letra mayúscula");
+                setOpenSnackbarValidation(true)
+                return
+            }
+            if (!/(?=.*[0-9])/.test(password)) {
+                setErrorValidation("La contraseña debe contener al menos un número");
+                setOpenSnackbarValidation(true)
+                return
+            }    
+            if (/[!-~]/.test(password)) {
+                setErrorValidation("La contraseña debe contener al menos un carácter especial");
+                setOpenSnackbarValidation(true);
+                return;
+            }
         }
 
         if(acceptTerms === false){
@@ -398,7 +456,7 @@ const SignUp = () => {
                     </Button>
                 </div>
 
-                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={handleSnackbarClose}>
                     <MuiAlert           
                         elevation={6}
                         variant="filled"
@@ -409,7 +467,7 @@ const SignUp = () => {
                     </MuiAlert>
                 </Snackbar>
 
-                <Snackbar open={openSnackbarDuplicated} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                <Snackbar open={openSnackbarDuplicated} autoHideDuration={3000} onClose={handleSnackbarClose}>
                     <MuiAlert           
                         elevation={6}
                         variant="filled"
@@ -420,7 +478,7 @@ const SignUp = () => {
                     </MuiAlert>
                 </Snackbar>
 
-                <Snackbar open={openSnackbarTerms} autoHideDuration={6000} onClose={handleSnackbarClose}>
+                <Snackbar open={openSnackbarTerms} autoHideDuration={3000} onClose={handleSnackbarClose}>
                     <MuiAlert           
                         elevation={6}
                         variant="filled"
@@ -428,6 +486,17 @@ const SignUp = () => {
                         severity="error"
                     >
                         Debe aceptar los términos y condiciones
+                    </MuiAlert>
+                </Snackbar>
+
+                <Snackbar open={openSnackbarValidation} autoHideDuration={3000} onClose={handleSnackbarClose}>
+                    <MuiAlert           
+                        elevation={6}
+                        variant="filled"
+                        onClose={handleSnackbarClose}
+                        severity="error"
+                    >
+                        {errorValidation}
                     </MuiAlert>
                 </Snackbar>
             </div>

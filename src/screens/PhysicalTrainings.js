@@ -1,6 +1,10 @@
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../components/Surfaces/NavBar';
+import Footer from '../components/Surfaces/Footer'
+import "./PhysicalTrainings.scss"
+
 const cardStyles = {
     card: {
       height: '100%',
@@ -31,40 +35,51 @@ const PhysicalTrainings = () => {
         }
       };
   return (
-    <div>
-      <Typography variant='h2'>Entrenamientos Fisicos</Typography>
-      <Box>
-        <Grid container spacing={2}>
-            <Grid item xs={5} style={cardStyles.grid}>
-                <Card
-                    sx={cardStyles.card}
-                    onClick={() => handleCardClick("Inmersivo")}
-                >
-                    <CardContent>
-                        <Typography
-                            variant='h5'
-                            component="div"
-                            sx={cardStyles.cardContent}
-                        >Realidad Virtual Inmersiva </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-            <Grid item xs={5} >
-                <Card
-                    sx={cardStyles.card}
-                    onClick={() => handleCardClick("No Inmersivo")}
-                >
-                    <CardContent>
-                        <Typography
-                            variant='h5'
-                            component="div"
-                            sx={cardStyles.cardContent}
-                        >Realidad Virtual NO Inmersiva </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-        </Grid>
-      </Box>
+    <div className='physical-main'>
+      <div className='nav-container'>
+        <NavBar showOptions={false}/>
+      </div>
+
+      <div className='trainings-cont'>
+        <Typography variant='h2'>Entrenamientos Fisicos</Typography>
+        <Box sx={{width:'100%'}}>
+          <Grid container spacing={2}>
+              <Grid item xs={5} style={cardStyles.grid}>
+                  <Card
+                      sx={cardStyles.card}
+                      onClick={() => handleCardClick("Inmersivo")}
+                  >
+                      <CardContent>
+                          <Typography
+                              variant='h5'
+                              component="div"
+                              sx={cardStyles.cardContent}
+                          >Realidad Virtual Inmersiva </Typography>
+                      </CardContent>
+                  </Card>
+              </Grid>
+              <Grid item xs={5} >
+                  <Card
+                      sx={cardStyles.card}
+                      onClick={() => handleCardClick("No Inmersivo")}
+                  >
+                      <CardContent>
+                          <Typography
+                              variant='h5'
+                              component="div"
+                              sx={cardStyles.cardContent}
+                          >Realidad Virtual NO Inmersiva </Typography>
+                      </CardContent>
+                  </Card>
+              </Grid>
+          </Grid>
+        </Box>
+      </div>
+
+      <div className='footer'>
+        <Footer></Footer>
+      </div>
+      
     </div>
   )
 }

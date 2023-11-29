@@ -1,5 +1,5 @@
 .home-main{
-    width: 100vw;
+    width: 99dvw;
     min-height: 100vh;
 
     background-image: url("../assets/images/global/border-back.svg");
@@ -8,12 +8,12 @@
     background-size: cover;
 
     & .nav-container{
-        position: fixed;     // Fijar la posición
-        top: 0;              // Anclar en la parte superior
+        position: fixed;     
+        top: 0;              
         width: 100%;
         height: 110px;
-        background-color: #fff; // Puedes cambiar el color de fondo según tu diseño
-        z-index: 1000;       // Asegura que la barra esté en la parte superior
+        background-color: #fff; 
+        z-index: 1000;       
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
