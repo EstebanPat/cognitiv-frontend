@@ -28,8 +28,8 @@ const NonImmersive = () => {
     })
   }, [])
 
-  const goToRoutines = (routines) => {
-    navigate('routines', { state: { routines: routines}})
+  const goToRoutines = (routines, id) => {
+    navigate('routines', { state: { routines: routines, routineList_id: id }})
   }
 
   return (
@@ -57,7 +57,7 @@ const NonImmersive = () => {
                         Rutina actual
                       </p>
                       {!routine.finished && (
-                        <Button onClick={() => goToRoutines(routine.routines)} sx={{marginTop:10}} variant="contained" color="success">
+                        <Button onClick={() => goToRoutines(routine.routines, routine._id)} sx={{marginTop:10}} variant="contained" color="success">
                           En proceso
                         </Button>
                       )}

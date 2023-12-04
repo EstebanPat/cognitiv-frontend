@@ -31,6 +31,7 @@ export const ENV = {
         GETROUTINE: "routine/",
         GETTRAINING: "nonimtrainings/",
         FINISHROUTINE: "routine/finish/",
+        CREATETRAININGINFO: "nonimtrainingsinfo/new-nonimtraininginfo"
     },
     JWT: {
         ACCESS: "access",

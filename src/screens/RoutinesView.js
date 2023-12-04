@@ -13,7 +13,7 @@ const RoutinesView = () => {
     const navigate = useNavigate();
     const routineApi = new Routines();
     const { state } = useLocation();
-    const { routines } = state;
+    const { routines, routineList_id } = state;
     const [allRoutines, setAllRoutines] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
@@ -58,16 +58,13 @@ const RoutinesView = () => {
             const diferenciaEnMilisegundos = fechaActual - lastFinishedRoutineDate;
             const milisegundosEnUnDia = 24 * 60 * 60 * 1000;
             if(diferenciaEnMilisegundos >= milisegundosEnUnDia){
-                console.log("Si la puede realizar");
-                navigate('trainings', { state: { routine: routine}})
+                navigate('trainings', { state: { routine: routine, routineList_id: routineList_id}})
             }else{
                 setLastFinished(lastFinishedRoutineDate.toString())
-                openModal()
-                console.log("No la puede realizar");
+                openModal();
             }
         } else {
-            console.log("No ha realizado ninguna rutina", lastFinishedRoutine);
-            navigate('trainings', { state: { routine: routine}})
+            navigate('trainings', { state: { routine: routine, routineList_id: routineList_id}})
         }
 
     }
@@ -101,11 +98,11 @@ const RoutinesView = () => {
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Fuerza muscular
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Resistencia aerobica
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
@@ -145,11 +142,11 @@ const RoutinesView = () => {
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Fuerza muscular
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Resistencia aerobica
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
@@ -191,11 +188,11 @@ const RoutinesView = () => {
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Fuerza muscular
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
-                                                >Flexibilidad
+                                                >Resistencia aerobica
                                             </Typography>
                                             <Typography fontFamily={'cursive'} fontSize={16}
                                                 sx={{marginLeft: "12px"}}
