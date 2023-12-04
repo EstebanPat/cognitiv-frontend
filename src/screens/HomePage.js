@@ -21,9 +21,7 @@ const HomePage = () => {
     if(text === "Entrenamiento Fisico"){
       navigate("physicaltrainings")
     }else if(text === "Entrenamiento Cognitivo"){
-
-    }else if(text === "Entrenamiento Conjunto"){
-
+      navigate("cognitive/game")
     }
   };
 
@@ -75,7 +73,7 @@ const HomePage = () => {
               </Card>
             </Grid>
 
-            <Grid item xs={3} className='grid-item'>
+            {/* <Grid item xs={3} className='grid-item'>
               <Card
                 className='card'
                 onClick={() => handleCardClick("Entrenamiento Conjunto")}
@@ -90,7 +88,7 @@ const HomePage = () => {
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
       </div>

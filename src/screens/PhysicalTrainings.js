@@ -42,8 +42,9 @@ const PhysicalTrainings = () => {
 
       <div className='trainings-cont'>
         <p>Entrenamientos físicos</p>
-        <Box sx={{width:'100%'}}>  
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} className='phy-grid' justifyContent="center">
+        <Box sx={{width:'100%', height:'100%'}}>  
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} className='phy-grid' justifyContent="center"
+            height={'0%'}>
               <Grid item xs={5} style={cardStyles.grid}>
                   <Card
                       sx={cardStyles.card}
