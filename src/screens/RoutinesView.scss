@@ -2,6 +2,16 @@
     display: flex;
     width: 100%;
     min-height: 100vh;
+
+    & .nav-container{
+        position: fixed;     
+        top: 0;              
+        width: 100%;
+        height: 110px;
+        background-color: #fff; 
+        z-index: 1000;       
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
     background-color: #55be98;
         
     & .routines-list-container{
@@ -9,6 +19,7 @@
         flex-direction: row;
         height: auto;
         flex-wrap: wrap;
+        margin-top: 100px;
         & .routine-list-item{
             height: 30vh;
             width: 50%;

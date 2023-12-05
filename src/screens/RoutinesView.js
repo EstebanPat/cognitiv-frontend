@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './RoutinesView.scss'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import RoutineModal from '../components/RoutineModal';
+import NavBar from '../components/Surfaces/NavBar'
 
 import logoICO from "../assets/icons/logoICO.png"
 
@@ -70,7 +71,9 @@ const RoutinesView = () => {
     }
   return (
     <div className='routines-container'>
-        
+        <div className='nav-container'>
+            <NavBar showOptions={false}/>
+        </div>
         <List className='routines-list-container'>
             {allRoutines &&
                 allRoutines.map((routine, index) => {

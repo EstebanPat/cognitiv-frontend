@@ -14,7 +14,7 @@ const TrainingView = () => {
     const [actualTrainingType, setActualTrainingType] = useState('');
     const [loading, setLoading] = useState(true);
     const [time, setTime] = useState(0);
-    const [running, setRunning] = useState(true);
+    const [running, setRunning] = useState(false);
     const [buttonContent, setButtonContent] = useState('Siguiente Ejercicio')
     const [trainingTimes, setTrainingTimes] = useState([]);
     const [lastTime, setLastTime] = useState(0);
@@ -61,7 +61,8 @@ const TrainingView = () => {
                 setTime(pre => pre + 1)
             }, 1000)
         }
-    }, running);
+        return () => clearInterval(timer.current)
+    }, [running]);
 
     useEffect(() => {
         if (finishRoutine === "Finalizar") {
@@ -73,15 +74,16 @@ const TrainingView = () => {
     const handleNextVideo = () => {
         const info = {
             training_id: actualTraining._id,
-            time: time - lastTime
+            time: time 
         }
-        setLastTime(time)
+    
         setTrainingTimes([... trainingTimes, info])
         console.log(info);
         const currentIndex = allTrainings.findIndex(training => training === actualTraining);
         const nextIndex = (currentIndex + 1) % allTrainings.length;
         setActualTraining(allTrainings[nextIndex]);
         setActualTrainingType(allTrainings[nextIndex].type);
+        setTime(0)
         
         if(currentIndex === 3){
             setButtonContent("Finalizar Rutina");
@@ -143,6 +145,13 @@ const TrainingView = () => {
                     <div className='timer'>
                         <Typography fontSize={30}>Tiempo transcurrido</Typography>
                         <Typography className='time' fontSize={70} color={'#004D0B'} fontFamily={'fantasy'}>{timerFormat(time)}</Typography>
+                        <div className='actions'>
+                            <Button variant="contained" color="primary" onClick={()=> {
+                                if(running) clearInterval(timer.current)
+                                setRunning(!running)
+                            }}>{running ? 'Detener': "Iniciar"}</Button>
+                            <Button variant="contained" color="primary" onClick={()=> setTime(0)}>Reiniciar</Button>
+                        </div>
                     </div>
                     
                 </div>
