@@ -3,12 +3,22 @@
     width: 100%;
     min-height: 100vh;
     background-color: #004D0B;
+    & .nav-container{
+        position: fixed;     
+        top: 0;              
+        width: 100%;
+        height: 110px;
+        background-color: #fff; 
+        z-index: 1000;       
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
         
     & .routines-list-container{
         display: flex;
         flex-direction: row;
         height: auto;
         flex-wrap: wrap;
+        margin-top: 100px;
         & .routine-list-item{
             height: 30vh;
             width: 50%;
