@@ -74,6 +74,29 @@ const PassRecovering = () => {
             setError("Las contraseñas no coinciden")
             setOpenSnackbar(true)
         }else{
+            const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@[-`{-~]).{6,}$/;
+            if (!passwordRegex.test(password)) {
+                if (password.length < 6) {
+                    setError("La contraseña debe tener al menos 6 caracteres");
+                    setOpenSnackbar(true)
+                    return
+                }
+                if (!/(?=.*[A-Z])/.test(password)) {
+                    setError("La contraseña debe contener al menos una letra mayúscula");
+                    setOpenSnackbar(true)
+                    return
+                }
+                if (!/(?=.*[0-9])/.test(password)) {
+                    setError("La contraseña debe contener al menos un número");
+                    setOpenSnackbar(true)
+                    return
+                }    
+                if (/[!-~]/.test(password)) {
+                    setError("La contraseña debe contener al menos un carácter especial");
+                    setOpenSnackbar(true);
+                    return;
+                }
+            }
             setError("")
             setOpenSnackbar(false)
 
