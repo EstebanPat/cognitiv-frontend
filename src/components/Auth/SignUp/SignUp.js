@@ -217,7 +217,7 @@ const SignUp = () => {
             return;
         }
 
-        const stringRegex = /^[A-Za-zñÑ]+$/;
+        const stringRegex = /^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/;
         if (!stringRegex.test(names) 
             || !stringRegex.test(namesAttendant) 
             || !stringRegex.test(lastnames)
@@ -263,6 +263,15 @@ const SignUp = () => {
                 setOpenSnackbarValidation(true);
                 return;
             }
+        }
+
+        const eighteenYearsAgo = new Date();
+        eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+
+        if (birthDayAttendant > eighteenYearsAgo || birthDay > eighteenYearsAgo) {
+            setErrorValidation("Debe ser mayor a 18 años para ingresar");
+            setOpenSnackbarValidation(true);
+            return;
         }
 
         if(acceptTerms === false){
