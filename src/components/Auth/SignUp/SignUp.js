@@ -265,6 +265,15 @@ const SignUp = () => {
             }
         }
 
+        const eighteenYearsAgo = new Date();
+        eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+
+        if (birthDayAttendant > eighteenYearsAgo || birthDay > eighteenYearsAgo) {
+            setErrorValidation("Debe ser mayor a 18 años para ingresar");
+            setOpenSnackbarValidation(true);
+            return;
+        }
+
         if(acceptTerms === false){
             setOpenSnackbarTerms(true);
             return;
